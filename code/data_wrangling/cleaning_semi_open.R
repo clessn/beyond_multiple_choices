@@ -185,6 +185,6 @@ table(data_clean$consultation_to_clean)
 
 # Save cleaned data
 
-saveRDS(data_clean, "_SharedFolder_beyong_multiple_choices/data/data_beyond_multiple_choices.rds")
+saveRDS(data_clean, "_SharedFolder_beyong_multiple_choices/data/data_semi_open_questions.rds")
 
 

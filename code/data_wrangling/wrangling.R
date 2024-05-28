@@ -11,7 +11,12 @@ data_text <- data_text_prelim  |>
     select(-starts_with("know")) |>
     select(-starts_with("best"))
 
-data_bmc <- data |>
+data_semi_open <- data |>
     select(starts_with("occupation"), starts_with("travail_domaine"), starts_with("religion"), starts_with("habitation"), starts_with("style"), starts_with("consult_who"))
 
-saveRDS(data_bmc, "_SharedFolder_beyong_multiple_choices/data/selected_variables.rds")
+data_full_open <- data |>
+    select(starts_with("know"), starts_with("best"))
+
+saveRDS(data_semi_open, "_SharedFolder_beyong_multiple_choices/data/selected_variables_semi_open.rds")
+
+saveRDS(data_full_open, "_SharedFolder_beyong_multiple_choices/data/selected_variables_full_open.rds")
