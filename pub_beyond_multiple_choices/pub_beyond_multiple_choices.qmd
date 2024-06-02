@@ -1,6 +1,6 @@
 ---
 title: Beyond Multiple Choices
-subtitle: Cleaning Open Ended Questions with Open Source LLMs
+subtitle: Cleaning Open-Ended Questions with Open Source LLMs
 author:
   - name: Laurence-Olivier M. Foisy
     email: mail@mfoisy
@@ -25,7 +25,7 @@ author:
           state: Québec
           postal-code: G1V 0A6
 abstract: |
-  This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae. Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at tempus elit.
+  Analyzing open-ended survey questions presents significant challenges due to the diversity of responses and the manual effort required for coding and categorization. This paper introduces a novel approach for cleaning and analyzing open-ended questions using open-source large language models (LLMs). Leveraging the R programming language and Ollama's API, we demonstrate an efficient, cost-effective method for processing qualitative data. Our approach enhances the ability to extract meaningful insights from survey responses, providing a scalable solution for researchers. By integrating open-source tools, we offer a practical framework for transforming the analysis of open-ended questions in survey research.
 keywords: 
   - keyword1
   - keyword2
@@ -35,7 +35,7 @@ format:
   elsevier-pdf:
     keep-tex: true
     journal:
-      name: Journal Name
+      name: CPSA
       formatting: preprint
       model: 3p
       cite-style: authoryear
@@ -43,13 +43,13 @@ format:
 
 # Introduction
 
-Open-ended survey questions are notoriously difficult to incorporate in surveys. They come with a host of challenges. Respondent often skip them because they are time-consuming and require more effort and reflexion than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 french and english Canadian respondents, people were asked "What is your favourite band or musician?" The most popular answer, The Beatles, was written in 10 different ways: the beatles (2), The Beatles (19), The beatles (2), The Bwatles (1), beatles (2), Beatles (40), beetles (3), Beetles (3), les beattels (1), Les Beatles (2). Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14;@bradburn_etal04]. 
+Open-ended survey questions are notoriously difficult to analyze. They come with a host of challenges. Respondent often skip them because they are time-consuming and require more effort and reflexion than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 french and english Canadian respondents, people were asked "What is your favourite band or musician?" The most popular answer, The Beatles, was written in 10 different ways: the beatles (2), The Beatles (19), The beatles (2), The Bwatles (1), beatles (2), Beatles (40), beetles (3), Beetles (3), les beattels (1), Les Beatles (2). Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14;@bradburn_etal04]. 
 
 <!-- CITER DATAGOTCHI -->
 
 However, open-ended questions can provide valuable insights into the attitudes, opinions, and perceptions of respondents. They allow for more detailed and nuanced responses than closed-ended questions. They avoid the problem of forcing respondents to choose between a limited number of options, which may not capture the full range of their opinions [@dillman_etal14]. Open-ended questions can help researchers to better understand the attitudes and opinions of respondents and to identify emerging issues and trends.
 
-@bickman_rog09 relate open-ended questions to qualitative-data since they require deeper analysis and interpretation, and close-ended questions to quantitative data since they are easier to analyze and quantify. This paper offers a method to easily analyse and quantify open-ended questions with the use of the R programming language and Ollama's API, allowing the use of a wide array of open-source language models directly in the cleaning process, free of charge. This method can provide valuable insights into the data and help researchers to better understand the attitudes and opinions of respondents.
+@bickman_rog09 relate open-ended questions to qualitative-data since they require deeper analysis and interpretation, and close-ended questions to quantitative data since they are easier to analyze and quantify in bulk. This paper use current technology to offer an easy method of analysis and quantification of open-ended questions with the use of the R programming language and Ollama's API, allowing the use of a wide array of open-source language models directly in the cleaning process, free of charge. This method can provide valuable insights into the data and help researchers to better understand the attitudes and opinions of respondents.
 
 # Survey Questions
 
@@ -57,12 +57,50 @@ In 1932, Rensis Likert published a seminal article in the Archives of Psychology
 
 # Methodology
 
-Ollama is an open source platform that provides a user-friendly way of downloading and running LLMs locally. It runs a server on the user's machine that can be accessed through an API. Doing so allows the user to interact with various LLMs without the need for extensive technical expertise or reliance on cloud-based platforms. The Ollama API is a powerful tool that can be used to generate text, summarize documents, and perform a wide range of other natural language processing tasks for free. The API is designed to be easy to use and flexible, allowing users to customize their interactions with LLMs to suit their needs. Using this tool, we can easily clean and analyze open-ended survey questions with limited resources.
+## Ollama
 
-A R package that allows researchers to interact with various language models through Ollama's API was built for this paper.
+Ollama is an open source platform that provides a user-friendly way of downloading and running LLMs locally. It runs a server on the user's machine that can be accessed through an API. Doing so allows the user to interact with various LLMs without the need for extensive technical expertise or reliance on cloud-based platforms. The Ollama API combined with their library of pre-trained models is a powerful tool that can be used to generate text, summarize documents, and perform a wide range of other natural language processing tasks for free. The API is designed to be easy to use and flexible, allowing users to customize their interactions with LLMs to suit their needs. Using this tool, we can easily clean and analyze open-ended survey questions with limited resources.
+
+Ollama offers a wide range of models in their library. Smaller models which can be used with a typical laptop and larger models which can run on GPU and require more computational power. Ollama recommends a minimum of 8GB of RAM to run smaller 7 Billion parameters models and 16GB of RAM to run larger 13 Billion parameters models [@ollama24].
+
+## The CLELLM Package
+
+A R package that allows researchers to interact with various language models through Ollama's API was built for this paper. A similar package has already been published on CRAN by @gruber_weber24. However, the one presented in this paper is a little bit more flexible, allowing to easily change the model used between each prompts making it easier to pick the best model for each respective task.
+
+To install the package, users can use the following function:
 
 ```r
 devtools::install_github("clessn/clellm")
 ```
+
+Linux users can use the following function to install ollama:
+
+```r
+clellm::install_ollama()
+```
+Windows and MacOS users can download the ollama binary from the [Ollama website](https://ollama.com/) and install it manually. Once Ollama is installed, the user can pull the models they want to use directly in R with the following function:
+
+```r
+clellm::ollama_install_model("model_name")
+```
+
+The package provides a simple functions that allow users to interact with LLMs through Ollama's API. The package is designed to be easy to use and flexible, allowing users to interact with a wide collection of open-source models the same way they would typically interact with OpenAI's GPT models. 
+
+```r
+clellm::ollama_prompt("prompt", model = "model_name", format = NULL, print_result = TRUE) 
+```
+The functions takes in four arguments, the prompt, the model to use, the format of the output, and whether to print the result. The prompt is the text that the model will use to generate a response. The model is the name of the model to use. The format is the format of the output, which can be either "json" or "text". The print_result argument is a logical value that determines whether the result should be printed to the console. The function returns the response generated by the model.
+
+## Cleaning Open-Ended Questions
+
+Cleaning open-ended questions is a crucial step in the analysis of survey data. It involves removing irrelevant information, correcting errors, and standardizing the responses. This process can be time-consuming and labor-intensive, especially when dealing with large datasets. However, by using LLMs, we can automate much of this process, making it faster and more efficient.
+
+
+
+# Results
+
+# Discussion
+
+# Conclusion
 
 # References {-}

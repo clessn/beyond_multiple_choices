@@ -6,7 +6,8 @@
 \documentclass[
   authoryear,
   preprint,
-  3p]{elsarticle}
+  3p,
+  twocolumn]{elsarticle}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -159,7 +160,27 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\journal{Journal Name}
+\usepackage{float}
+\makeatletter
+\let\oldlt\longtable
+\let\endoldlt\endlongtable
+\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
+\def\longtable@i[#1]{\begin{figure}[H]
+\onecolumn
+\begin{minipage}{0.5\textwidth}
+\oldlt[#1]
+}
+\def\longtable@ii{\begin{figure}[H]
+\onecolumn
+\begin{minipage}{0.5\textwidth}
+\oldlt
+}
+\def\endlongtable{\endoldlt
+\end{minipage}
+\twocolumn
+\end{figure}}
+\makeatother
+\journal{CPSA}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -184,7 +205,7 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{Beyond Multiple Choices \\\large{Cleaning Open Ended Questions
+\title{Beyond Multiple Choices \\\large{Cleaning Open-Ended Questions
 with Open Source LLMs} }
 \author[1]{Laurence-Olivier M. Foisy%
 \corref{cor1}%
@@ -204,15 +225,17 @@ politique},addressline={2325 Rue de l'Université, Québec, QC G1V
 
         
 \begin{abstract}
-This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing
-elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget
-velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris
-sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta
-egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet
-auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo
-molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae.
-Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at
-tempus elit.
+Analyzing open-ended survey questions presents significant challenges
+due to the diversity of responses and the manual effort required for
+coding and categorization. This paper introduces a novel approach for
+cleaning and analyzing open-ended questions using open-source large
+language models (LLMs). Leveraging the R programming language and
+Ollama's API, we demonstrate an efficient, cost-effective method for
+processing qualitative data. Our approach enhances the ability to
+extract meaningful insights from survey responses, providing a scalable
+solution for researchers. By integrating open-source tools, we offer a
+practical framework for transforming the analysis of open-ended
+questions in survey research.
 \end{abstract}
 
 
@@ -227,11 +250,11 @@ tempus elit.
     
 \section{Introduction}\label{introduction}
 
-Open-ended survey questions are notoriously difficult to incorporate in
-surveys. They come with a host of challenges. Respondent often skip them
-because they are time-consuming and require more effort and reflexion
-than closed-ended questions. It can also be troublesome for mobile users
-to type lengthy and complex responses \citep{dillman_etal14}. Open-ended
+Open-ended survey questions are notoriously difficult to analyze. They
+come with a host of challenges. Respondent often skip them because they
+are time-consuming and require more effort and reflexion than
+closed-ended questions. It can also be troublesome for mobile users to
+type lengthy and complex responses \citep{dillman_etal14}. Open-ended
 questions are also difficult to analyze because they require manual
 coding and categorization of the responses. Indeed, many respondents can
 give the same answer written in different ways. In a 2024 pilot survey
@@ -258,12 +281,13 @@ identify emerging issues and trends.
 \citet{bickman_rog09} relate open-ended questions to qualitative-data
 since they require deeper analysis and interpretation, and close-ended
 questions to quantitative data since they are easier to analyze and
-quantify. This paper offers a method to easily analyse and quantify
-open-ended questions with the use of the R programming language and
-Ollama's API, allowing the use of a wide array of open-source language
-models directly in the cleaning process, free of charge. This method can
-provide valuable insights into the data and help researchers to better
-understand the attitudes and opinions of respondents.
+quantify in bulk. This paper use current technology to offer an easy
+method of analysis and quantification of open-ended questions with the
+use of the R programming language and Ollama's API, allowing the use of
+a wide array of open-source language models directly in the cleaning
+process, free of charge. This method can provide valuable insights into
+the data and help researchers to better understand the attitudes and
+opinions of respondents.
 
 \section{Survey Questions}\label{survey-questions}
 
@@ -287,20 +311,37 @@ options, which may not capture the full range of their opinions.
 
 \section{Methodology}\label{methodology}
 
+\subsection{Ollama}\label{ollama}
+
 Ollama is an open source platform that provides a user-friendly way of
 downloading and running LLMs locally. It runs a server on the user's
 machine that can be accessed through an API. Doing so allows the user to
 interact with various LLMs without the need for extensive technical
-expertise or reliance on cloud-based platforms. The Ollama API is a
-powerful tool that can be used to generate text, summarize documents,
-and perform a wide range of other natural language processing tasks for
-free. The API is designed to be easy to use and flexible, allowing users
-to customize their interactions with LLMs to suit their needs. Using
-this tool, we can easily clean and analyze open-ended survey questions
-with limited resources.
+expertise or reliance on cloud-based platforms. The Ollama API combined
+with their library of pre-trained models is a powerful tool that can be
+used to generate text, summarize documents, and perform a wide range of
+other natural language processing tasks for free. The API is designed to
+be easy to use and flexible, allowing users to customize their
+interactions with LLMs to suit their needs. Using this tool, we can
+easily clean and analyze open-ended survey questions with limited
+resources.
+
+Ollama offers a wide range of models in their library. Smaller models
+which can be used with a typical laptop and larger models which can run
+on GPU and require more computational power. Ollama recommends a minimum
+of 8GB of RAM to run smaller 7 Billion parameters models and 16GB of RAM
+to run larger 13 Billion parameters models \citep{ollama24}.
+
+\subsection{The CLELLM Package}\label{the-clellm-package}
 
 A R package that allows researchers to interact with various language
-models through Ollama's API was built for this paper.
+models through Ollama's API was built for this paper. A similar package
+has already been published on CRAN by \citet{gruber_weber24}. However,
+the one presented in this paper is a little bit more flexible, allowing
+to easily change the model used between each prompts making it easier to
+pick the best model for each respective task.
+
+To install the package, users can use the following function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -308,6 +349,53 @@ models through Ollama's API was built for this paper.
 \end{Highlighting}
 \end{Shaded}
 
+Linux users can use the following function to install ollama:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clellm}\SpecialCharTok{::}\FunctionTok{install\_ollama}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Windows and MacOS users can download the ollama binary from the
+\href{https://ollama.com/}{Ollama website} and install it manually. Once
+Ollama is installed, the user can pull the models they want to use
+directly in R with the following function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clellm}\SpecialCharTok{::}\FunctionTok{ollama\_install\_model}\NormalTok{(}\StringTok{"model\_name"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The package provides a simple functions that allow users to interact
+with LLMs through Ollama's API. The package is designed to be easy to
+use and flexible, allowing users to interact with a wide collection of
+open-source models the same way they would typically interact with
+OpenAI's GPT models.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clellm}\SpecialCharTok{::}\FunctionTok{ollama\_prompt}\NormalTok{(}\StringTok{"prompt"}\NormalTok{, }\AttributeTok{model =} \StringTok{"model\_name"}\NormalTok{, }\AttributeTok{format =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{print\_result =} \ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+The functions takes in four arguments, the prompt, the model to use, the
+format of the output, and whether to print the result. The prompt is the
+text that the model will use to generate a response. The model is the
+name of the model to use. The format is the format of the output, which
+can be either ``json'' or ``text''. The print\_result argument is a
+logical value that determines whether the result should be printed to
+the console. The function returns the response generated by the model.
+
+\subsection{Cleaning Open-Ended
+Questions}\label{cleaning-open-ended-questions}
+
+\section{Results}\label{results}
+
+\section{Discussion}\label{discussion}
+
+\section{Conclusion}\label{conclusion}
 
 
 \renewcommand\refname{References}
