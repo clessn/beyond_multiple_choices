@@ -1,0 +1,68 @@
+---
+title: Beyond Multiple Choices
+subtitle: Cleaning Open Ended Questions with Open Source LLMs
+author:
+  - name: Laurence-Olivier M. Foisy
+    email: mail@mfoisy
+    affiliations: 
+        - id: ULaval
+          name: Université Laval
+          department: Département de science politique
+          address: 2325 Rue de l'Université, Québec, QC G1V 0A6
+          city: Québec
+          state: Québec
+          postal-code: G1V 0A6
+    attributes:
+        corresponding: true
+  - name: Yannick Dufresne
+    email: yannick.dufresne@pol.ulaval.ca
+    affiliations:
+        - id: ULaval
+          name: Université Laval
+          department: Département de science politique
+          address: 2325 Rue de l'Université, Québec, QC G1V 0A6
+          city: Québec
+          state: Québec
+          postal-code: G1V 0A6
+abstract: |
+  This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae. Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at tempus elit.
+keywords: 
+  - keyword1
+  - keyword2
+date: last-modified
+bibliography: bibliography.bib
+format:
+  elsevier-pdf:
+    keep-tex: true
+    journal:
+      name: Journal Name
+      formatting: preprint
+      model: 3p
+      cite-style: authoryear
+---
+
+# Introduction
+
+Open-ended survey questions are notoriously difficult to incorporate in surveys. They come with a host of challenges. Respondent often skip them because they are time-consuming and require more effort and reflexion than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 french and english Canadian respondents, people were asked "What is your favourite band or musician?" The most popular answer, The Beatles, was written in 10 different ways: the beatles (2), The Beatles (19), The beatles (2), The Bwatles (1), beatles (2), Beatles (40), beetles (3), Beetles (3), les beattels (1), Les Beatles (2). Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14;@bradburn_etal04]. 
+
+<!-- CITER DATAGOTCHI -->
+
+However, open-ended questions can provide valuable insights into the attitudes, opinions, and perceptions of respondents. They allow for more detailed and nuanced responses than closed-ended questions. They avoid the problem of forcing respondents to choose between a limited number of options, which may not capture the full range of their opinions [@dillman_etal14]. Open-ended questions can help researchers to better understand the attitudes and opinions of respondents and to identify emerging issues and trends.
+
+@bickman_rog09 relate open-ended questions to qualitative-data since they require deeper analysis and interpretation, and close-ended questions to quantitative data since they are easier to analyze and quantify. This paper offers a method to easily analyse and quantify open-ended questions with the use of the R programming language and Ollama's API, allowing the use of a wide array of open-source language models directly in the cleaning process, free of charge. This method can provide valuable insights into the data and help researchers to better understand the attitudes and opinions of respondents.
+
+# Survey Questions
+
+In 1932, Rensis Likert published a seminal article in the Archives of Psychology, introducing a new method to measure the intensity of agreement or disagreement with a statement. The author underlined the difficulty of measuring attitudes. He wrote that "since it is possible to group stimuli in almost any conceivable manner and to elassify and subclassify them indefinitely, it is strictly true that the number of attitudes which any given person possesses is almost infinite" [@likert32]. Now known as the likert scale, this measure is widely used in surveys and questionnaires. It allows for a standardized way to measure attitudes, opinions, and perceptions. The likert scale is widely used in social sciences because it is easy to administer and analyze but it has several limitations that prevent a deeper analysis of the data. One of the main limitations of the likert scale is that it is a closed-ended question that does not allow for nuance or complexity in the responses. The way survey respondents answer is completely subjective.  It forces respondents to choose between a limited number of options, which may not capture the full range of their opinions.
+
+# Methodology
+
+Ollama is an open source platform that provides a user-friendly way of downloading and running LLMs locally. It runs a server on the user's machine that can be accessed through an API. Doing so allows the user to interact with various LLMs without the need for extensive technical expertise or reliance on cloud-based platforms. The Ollama API is a powerful tool that can be used to generate text, summarize documents, and perform a wide range of other natural language processing tasks for free. The API is designed to be easy to use and flexible, allowing users to customize their interactions with LLMs to suit their needs. Using this tool, we can easily clean and analyze open-ended survey questions with limited resources.
+
+A R package that allows researchers to interact with various language models through Ollama's API was built for this paper.
+
+```r
+devtools::install_github("clessn/clellm")
+```
+
+# References {-}
