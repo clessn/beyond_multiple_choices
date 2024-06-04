@@ -6,8 +6,7 @@
 \documentclass[
   authoryear,
   preprint,
-  3p,
-  twocolumn]{elsarticle}
+  3p]{elsarticle}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -44,14 +43,28 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -71,7 +84,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -81,7 +94,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -160,26 +173,6 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\usepackage{float}
-\makeatletter
-\let\oldlt\longtable
-\let\endoldlt\endlongtable
-\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
-\def\longtable@i[#1]{\begin{figure}[H]
-\onecolumn
-\begin{minipage}{0.5\textwidth}
-\oldlt[#1]
-}
-\def\longtable@ii{\begin{figure}[H]
-\onecolumn
-\begin{minipage}{0.5\textwidth}
-\oldlt
-}
-\def\endlongtable{\endoldlt
-\end{minipage}
-\twocolumn
-\end{figure}}
-\makeatother
 \journal{CPSA}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -250,24 +243,24 @@ questions in survey research.
     
 \section{Introduction}\label{introduction}
 
-Open-ended survey questions are notoriously difficult to analyze. They
-come with a host of challenges. Respondent often skip them because they
-are time-consuming and require more effort and reflexion than
-closed-ended questions. It can also be troublesome for mobile users to
-type lengthy and complex responses \citep{dillman_etal14}. Open-ended
-questions are also difficult to analyze because they require manual
-coding and categorization of the responses. Indeed, many respondents can
-give the same answer written in different ways. In a 2024 pilot survey
-about lifestyle and health given to 2000 french and english Canadian
-respondents, people were asked ``What is your favourite band or
-musician?'' The most popular answer, The Beatles, was written in 10
-different ways: the beatles (2), The Beatles (19), The beatles (2), The
-Bwatles (1), beatles (2), Beatles (40), beetles (3), Beetles (3), les
-beattels (1), Les Beatles (2). Grammatical errors, typos, and
-misspellings can make it difficult to analyze the data. While it is not
-impossible to analyze open-ended questions, it is generally
-time-consuming and expensive, especially when dealing with large
-datasets \citep{dillman_etal14, bradburn_etal04}.
+Open-ended survey questions are notoriously difficult to analyze.
+Implementing them in a survey come with a host of challenges. Respondent
+often skip them because they are time-consuming and require more effort
+and reflexion than closed-ended questions. It can also be troublesome
+for mobile users to type lengthy and complex responses
+\citep{dillman_etal14}. Open-ended questions are also difficult to
+analyze because they require manual coding and categorization of the
+responses. Indeed, many respondents can give the same answer written in
+different ways. In a 2024 pilot survey about lifestyle and health given
+to 2000 french and english Canadian respondents, people were asked
+``What is your favourite band or musician?'' The most popular answer,
+The Beatles, was written in 10 different ways: the beatles (2), The
+Beatles (19), The beatles (2), The Bwatles (1), beatles (2), Beatles
+(40), beetles (3), Beetles (3), les beattels (1), Les Beatles (2).
+Grammatical errors, typos, and misspellings can make it difficult to
+analyze the data. While it is not impossible to analyze open-ended
+questions, it is generally time-consuming and expensive, especially when
+dealing with large datasets \citep{dillman_etal14, bradburn_etal04}.
 
 However, open-ended questions can provide valuable insights into the
 attitudes, opinions, and perceptions of respondents. They allow for more
@@ -308,6 +301,19 @@ closed-ended question that does not allow for nuance or complexity in
 the responses. The way survey respondents answer is completely
 subjective. It forces respondents to choose between a limited number of
 options, which may not capture the full range of their opinions.
+
+\section{Research Question}\label{research-question}
+
+The research question of this paper is to determine if open-source
+language models can be used to clean and analyze open-ended survey
+questions. The goal is to provide a practical framework for transforming
+the analysis of open-ended questions in survey research. By leveraging
+open-source tools, we aim to enhance the ability to extract meaningful
+insights from survey responses, providing a scalable solution for
+researchers. The goal is not to replace other methods of analyzing
+open-ended questions but to provide and validate an alternative that
+could be used in conjunction with other methods to improve the quality
+of the analysis.
 
 \section{Methodology}\label{methodology}
 
@@ -390,6 +396,32 @@ the console. The function returns the response generated by the model.
 
 \subsection{Cleaning Open-Ended
 Questions}\label{cleaning-open-ended-questions}
+
+Cleaning open-ended questions is a crucial step in the analysis of
+survey data. It involves removing irrelevant information, correcting
+errors, and standardizing the responses. This process can be
+time-consuming and labor-intensive, especially when dealing with large
+datasets. However, by using LLMs, we can automate much of this process,
+making it faster and more efficient.
+
+To validate if open-source LLMs with limited parameters can be used to
+clean open-ended questions, we will run issue categorization on a subset
+of 200 respondents drawn randomly from the 2021 Canadian Election Study.
+The respondents were asked ``What is the most important issue to you
+personally in this federal election?'' and could answer freely.
+
+For this task, the open-source mistral model by \citet{jiang_etal23} was
+used to analyze the answer and classify it into one of the following 12
+issue categories: ``Law and Crime'', ``Culture and Nationalism'',
+``Public Lands and Agriculture'', ``Governments and Governance'',
+``Immigration'', ``Rights, Liberties, Minorities, and Discrimination'',
+``Health and Social Services'', ``Economy and Employment'',
+``Education'', ``Environment and Energy''. ``International Affairs and
+Defense'', ``Technology''
+
+The model was run on a desktop with 16GB of RAM, a Intel i5-4690K CPU
+and a GTX 1660 TI GPU. Relatively old hardware that is still able to run
+the model without any issues.
 
 \section{Results}\label{results}
 

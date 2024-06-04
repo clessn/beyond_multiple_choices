@@ -8,7 +8,7 @@ library(dplyr)
 # cps21_religion
 # cps21_age
 
-data <- sondr::read_any_csv("_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/ces2021.csv")  
+data <- sondr::read_any_csv("_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/raw/ces2021.csv")  
 
 data_raw <- data |> 
   select(cps21_imp_iss, cps21_genderid, cps21_province, cps21_education, cps21_religion, cps21_income_cat, cps21_age, cps21_language_1) |> 
@@ -110,3 +110,11 @@ table(data_clean$open_ended_issue)
 # Save data
 
 saveRDS(data_clean, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_clean.rds")
+
+# create a random subset of 200 respondents
+
+data_subset <- data_clean[sample(nrow(data), 200), ]
+
+# Save the data to a file
+
+saveRDS(data_subset, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_200_subset.rds")
