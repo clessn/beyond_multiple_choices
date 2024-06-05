@@ -15,7 +15,7 @@ issues_string <- paste0("'", paste(issues, collapse = "', '"), "'")
 data$issue_category_mistral <- NA
 
 for (i in 1:nrow(data)) {
-    prompt = paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
+    prompt <- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
 
     detected_issue <- NA
     attempt <- 1
@@ -48,7 +48,7 @@ table(data$issue_category_mistral, useNA = "ifany")
 data$issue_category_llama3 <- NA
 
 for (i in 1:nrow(data)) {
-    prompt = paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
+    prompt <- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
 
     detected_issue <- NA
     attempt <- 1
@@ -109,7 +109,6 @@ for (i in 1:nrow(data)) {
 
 table(data$issue_category_phi3, useNA = "ifany")
 
-
 # Prompting GPT-4
 
 data$issue_category_gpt4 <- NA
@@ -154,7 +153,6 @@ for (i in 1:nrow(data)) {
 
     print(paste0(i, " was ", data$open_ended_issue[i], " and is now marked as ", detected_issue, "."))
 }
-
 
 table(data$issue_category_gpt4, useNA = "ifany")
 

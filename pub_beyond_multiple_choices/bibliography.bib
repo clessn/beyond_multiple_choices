@@ -1,3 +1,21 @@
+@misc{abdin_etal24,
+  title = {Phi-3 {{Technical Report}}: {{A Highly Capable Language Model Locally}} on {{Your Phone}}},
+  shorttitle = {Phi-3 {{Technical Report}}},
+  author = {Abdin, Marah and Jacobs, Sam Ade and Awan, Ammar Ahmad and Aneja, Jyoti and Awadallah, Ahmed and Awadalla, Hany and Bach, Nguyen and Bahree, Amit and Bakhtiari, Arash and Bao, Jianmin and Behl, Harkirat and Benhaim, Alon and Bilenko, Misha and Bjorck, Johan and Bubeck, S{\'e}bastien and Cai, Qin and Cai, Martin and Mendes, Caio C{\'e}sar Teodoro and Chen, Weizhu and Chaudhary, Vishrav and Chen, Dong and Chen, Dongdong and Chen, Yen-Chun and Chen, Yi-Ling and Chopra, Parul and Dai, Xiyang and Del Giorno, Allie and {de Rosa}, Gustavo and Dixon, Matthew and Eldan, Ronen and Fragoso, Victor and Iter, Dan and Gao, Mei and Gao, Min and Gao, Jianfeng and Garg, Amit and Goswami, Abhishek and Gunasekar, Suriya and Haider, Emman and Hao, Junheng and Hewett, Russell J. and Huynh, Jamie and Javaheripi, Mojan and Jin, Xin and Kauffmann, Piero and Karampatziakis, Nikos and Kim, Dongwoo and Khademi, Mahoud and Kurilenko, Lev and Lee, James R. and Lee, Yin Tat and Li, Yuanzhi and Li, Yunsheng and Liang, Chen and Liden, Lars and Liu, Ce and Liu, Mengchen and Liu, Weishung and Lin, Eric and Lin, Zeqi and Luo, Chong and Madan, Piyush and Mazzola, Matt and Mitra, Arindam and Modi, Hardik and Nguyen, Anh and Norick, Brandon and Patra, Barun and {Perez-Becker}, Daniel and Portet, Thomas and Pryzant, Reid and Qin, Heyang and Radmilac, Marko and Rosset, Corby and Roy, Sambudha and Ruwase, Olatunji and Saarikivi, Olli and Saied, Amin and Salim, Adil and Santacroce, Michael and Shah, Shital and Shang, Ning and Sharma, Hiteshi and Shukla, Swadheen and Song, Xia and Tanaka, Masahiro and Tupini, Andrea and Wang, Xin and Wang, Lijuan and Wang, Chunyu and Wang, Yu and Ward, Rachel and Wang, Guanhua and Witte, Philipp and Wu, Haiping and Wyatt, Michael and Xiao, Bin and Xu, Can and Xu, Jiahang and Xu, Weijian and Yadav, Sonali and Yang, Fan and Yang, Jianwei and Yang, Ziyi and Yang, Yifan and Yu, Donghan and Yuan, Lu and Zhang, Chengruidong and Zhang, Cyril and Zhang, Jianwen and Zhang, Li Lyna and Zhang, Yi and Zhang, Yue and Zhang, Yunan and Zhou, Xiren},
+  year = {2024},
+  month = may,
+  number = {arXiv:2404.14219},
+  eprint = {2404.14219},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.2404.14219},
+  urldate = {2024-06-05},
+  abstract = {We introduce phi-3-mini, a 3.8 billion parameter language model trained on 3.3 trillion tokens, whose overall performance, as measured by both academic benchmarks and internal testing, rivals that of models such as Mixtral 8x7B and GPT-3.5 (e.g., phi-3-mini achieves 69\% on MMLU and 8.38 on MT-bench), despite being small enough to be deployed on a phone. The innovation lies entirely in our dataset for training, a scaled-up version of the one used for phi-2, composed of heavily filtered publicly available web data and synthetic data. The model is also further aligned for robustness, safety, and chat format. We also provide some initial parameter-scaling results with a 7B and 14B models trained for 4.8T tokens, called phi-3-small and phi-3-medium, both significantly more capable than phi-3-mini (e.g., respectively 75\% and 78\% on MMLU, and 8.7 and 8.9 on MT-bench). Moreover, we also introduce phi-3-vision, a 4.2 billion parameter model based on phi-3-mini with strong reasoning capabilities for image and text prompts.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computation and Language},
+  file = {/home/ral/Zotero/storage/K5TL8ZKQ/Abdin et al_2024_Phi-3 Technical Report.pdf;/home/ral/Zotero/storage/ATC7BYU6/2404.html}
+}
+
 @book{bickman_rog09,
   title = {The {{SAGE}} Handbook of Applied Social Research Methods},
   editor = {Bickman, Leonard and Rog, Debra J.},
@@ -120,6 +138,18 @@
   file = {/home/ral/Zotero/storage/HQKV2UCI/Likert_1932.pdf}
 }
 
+@misc{meta24,
+  title = {Introducing {{Meta Llama}} 3: {{The}} Most Capable Openly Available {{LLM}} to Date},
+  shorttitle = {Introducing {{Meta Llama}} 3},
+  author = {{Meta}},
+  year = {2024},
+  journal = {Meta AI},
+  urldate = {2024-06-05},
+  abstract = {Today, we're introducing Meta Llama 3, the next generation of our state-of-the-art open source large language model. In the coming months, we expect to share new capabilities, additional model sizes, and more.},
+  howpublished = {https://ai.meta.com/blog/meta-llama-3/},
+  langid = {english}
+}
+
 @misc{ollama24,
   title = {Ollama/Ollama},
   author = {{Ollama}},
@@ -130,4 +160,32 @@
   copyright = {MIT},
   howpublished = {Ollama},
   keywords = {gemma,go,golang,llama,llama2,llama3,llava,llm,llms,mistral,ollama,phi3}
+}
+
+@techreport{openai23b,
+  title = {{{GPT-4 Technical Report}}},
+  author = {{OpenAI}},
+  year = {2023},
+  pages = {100},
+  institution = {OpenAI},
+  urldate = {2024-06-05},
+  abstract = {We report the development of GPT-4, a large-scale, multimodal model which can accept image and text inputs and produce text outputs. While less capable than humans in many real-world scenarios, GPT-4 exhibits human-level performance on various professional and academic benchmarks, including passing a simulated bar exam with a score around the top 10\% of test takers. GPT-4 is a Transformer- based model pre-trained to predict the next token in a document. The post-training alignment process results in improved performance on measures of factuality and adherence to desired behavior. A core component of this project was developing infrastructure and optimization methods that behave predictably across a wide range of scales. This allowed us to accurately predict some aspects of GPT-4's performance based on models trained with no more than 1/1,000th the compute of GPT-4.},
+  file = {/home/ral/Zotero/storage/9MGLMHI6/gpt-4.pdf}
+}
+
+@misc{yadav_bethard19,
+  title = {A {{Survey}} on {{Recent Advances}} in {{Named Entity Recognition}} from {{Deep Learning}} Models},
+  author = {Yadav, Vikas and Bethard, Steven},
+  year = {2019},
+  month = oct,
+  number = {arXiv:1910.11470},
+  eprint = {1910.11470},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  urldate = {2024-06-05},
+  abstract = {Named Entity Recognition (NER) is a key component in NLP systems for question answering, information retrieval, relation extraction, etc. NER systems have been studied and developed widely for decades, but accurate systems using deep neural networks (NN) have only been introduced in the last few years. We present a comprehensive survey of deep neural network architectures for NER, and contrast them with previous approaches to NER based on feature engineering and other supervised or semi-supervised learning algorithms. Our results highlight the improvements achieved by neural networks, and show how incorporating some of the lessons learned from past work on feature-based NER systems can yield further improvements.},
+  archiveprefix = {arxiv},
+  langid = {english},
+  keywords = {Computer Science - Computation and Language,Computer Science - Machine Learning},
+  file = {/home/ral/Zotero/storage/2VKWYK38/Yadav_Bethard_2019_A Survey on Recent Advances in Named Entity Recognition from Deep Learning.pdf}
 }

@@ -15,5 +15,10 @@ contributes:
         - elsarticle.cls
       cite-method: natbib
       number-sections: true
+      include-in-header: 
+       text: |
+         \usepackage{fvextra}
+         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+         \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
     html:
       theme: styles/elsevier.scss

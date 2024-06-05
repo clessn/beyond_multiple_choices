@@ -132,6 +132,9 @@
 \def\fps@figure{htbp}
 \makeatother
 
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -185,7 +188,7 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Beyond Multiple Choices},
-  pdfauthor={Laurence-Olivier M. Foisy; Yannick Dufresne},
+  pdfauthor={Laurence-Olivier M. Foisy; Hubert Cadieux; Yannick Dufresne},
   pdfkeywords={keyword1, keyword2},
   colorlinks=true,
   linkcolor={blue},
@@ -198,12 +201,16 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{Beyond Multiple Choices \\\large{Cleaning Open-Ended Questions
-with Open Source LLMs} }
+\title{Beyond Multiple Choices \\\large{Capturing Nuanced Public Opinion
+with Large Language Models} }
 \author[1]{Laurence-Olivier M. Foisy%
 \corref{cor1}%
 }
  \ead{mail@mfoisy} 
+\author[1]{Hubert Cadieux%
+%
+}
+ \ead{hubert.cadieux.1@ulaval.ca} 
 \author[1]{Yannick Dufresne%
 %
 }
@@ -214,6 +221,7 @@ politique},addressline={2325 Rue de l'Université, Québec, QC G1V
 0A6},city={Québec},postcode={G1V 0A6},postcodesep={}}
 
 \cortext[cor1]{Corresponding author}
+
 
 
         
@@ -243,24 +251,32 @@ questions in survey research.
     
 \section{Introduction}\label{introduction}
 
-Open-ended survey questions are notoriously difficult to analyze.
-Implementing them in a survey come with a host of challenges. Respondent
-often skip them because they are time-consuming and require more effort
-and reflexion than closed-ended questions. It can also be troublesome
-for mobile users to type lengthy and complex responses
-\citep{dillman_etal14}. Open-ended questions are also difficult to
-analyze because they require manual coding and categorization of the
-responses. Indeed, many respondents can give the same answer written in
-different ways. In a 2024 pilot survey about lifestyle and health given
-to 2000 french and english Canadian respondents, people were asked
-``What is your favourite band or musician?'' The most popular answer,
-The Beatles, was written in 10 different ways: the beatles (2), The
-Beatles (19), The beatles (2), The Bwatles (1), beatles (2), Beatles
-(40), beetles (3), Beetles (3), les beattels (1), Les Beatles (2).
-Grammatical errors, typos, and misspellings can make it difficult to
-analyze the data. While it is not impossible to analyze open-ended
-questions, it is generally time-consuming and expensive, especially when
-dealing with large datasets \citep{dillman_etal14, bradburn_etal04}.
+Open-ended survey questions are notoriously difficult to analyze. In
+1932, Rensis Likert published a seminal article in the Archives of
+Psychology, introducing a new method to measure the intensity of
+agreement or disagreement with a statement. The author underlined the
+difficulty of measuring attitudes. He wrote that ``since it is possible
+to group stimuli in almost any conceivable manner and to classify and
+subclassify them indefinitely, it is strictly true that the number of
+attitudes which any given person possesses is almost infinite''
+\citep{likert32}. Indeed, implementing open-ended questions in a survey
+comes with a host of challenges. Respondents often skip them because
+they are time-consuming and require more effort and reflection than
+closed-ended questions. It can also be troublesome for mobile users to
+type lengthy and complex responses \citep{dillman_etal14}. Open-ended
+questions are also difficult to analyze because they require manual
+coding and categorization of the responses. Indeed, many respondents can
+give the same answer written in different ways. In a 2024 pilot survey
+about lifestyle and health given to 2000 French and English Canadian
+respondents, people were asked, ``What is your favourite band or
+musician?'' The most popular answer chosen by 75 respondents, The
+Beatles, was written in 10 different ways: the beatles, The Beatles, The
+beatles, The Bwatles, beatles, Beatles, beetles, Beetles, les beattels,
+and Les Beatles. Grammatical errors, typos, and misspellings can make it
+difficult to analyze the data. While it is not impossible to analyze
+open-ended questions, it is generally time-consuming and expensive,
+especially when dealing with large datasets
+\citep{dillman_etal14, bradburn_etal04}.
 
 However, open-ended questions can provide valuable insights into the
 attitudes, opinions, and perceptions of respondents. They allow for more
@@ -274,7 +290,7 @@ identify emerging issues and trends.
 \citet{bickman_rog09} relate open-ended questions to qualitative-data
 since they require deeper analysis and interpretation, and close-ended
 questions to quantitative data since they are easier to analyze and
-quantify in bulk. This paper use current technology to offer an easy
+quantify in bulk. This paper use current AI technology to offer an easy
 method of analysis and quantification of open-ended questions with the
 use of the R programming language and Ollama's API, allowing the use of
 a wide array of open-source language models directly in the cleaning
@@ -282,38 +298,18 @@ process, free of charge. This method can provide valuable insights into
 the data and help researchers to better understand the attitudes and
 opinions of respondents.
 
-\section{Survey Questions}\label{survey-questions}
-
-In 1932, Rensis Likert published a seminal article in the Archives of
-Psychology, introducing a new method to measure the intensity of
-agreement or disagreement with a statement. The author underlined the
-difficulty of measuring attitudes. He wrote that ``since it is possible
-to group stimuli in almost any conceivable manner and to elassify and
-subclassify them indefinitely, it is strictly true that the number of
-attitudes which any given person possesses is almost infinite''
-\citep{likert32}. Now known as the likert scale, this measure is widely
-used in surveys and questionnaires. It allows for a standardized way to
-measure attitudes, opinions, and perceptions. The likert scale is widely
-used in social sciences because it is easy to administer and analyze but
-it has several limitations that prevent a deeper analysis of the data.
-One of the main limitations of the likert scale is that it is a
-closed-ended question that does not allow for nuance or complexity in
-the responses. The way survey respondents answer is completely
-subjective. It forces respondents to choose between a limited number of
-options, which may not capture the full range of their opinions.
-
 \section{Research Question}\label{research-question}
 
-The research question of this paper is to determine if open-source
-language models can be used to clean and analyze open-ended survey
-questions. The goal is to provide a practical framework for transforming
-the analysis of open-ended questions in survey research. By leveraging
-open-source tools, we aim to enhance the ability to extract meaningful
-insights from survey responses, providing a scalable solution for
-researchers. The goal is not to replace other methods of analyzing
-open-ended questions but to provide and validate an alternative that
-could be used in conjunction with other methods to improve the quality
-of the analysis.
+Can open-source language models be trusted to accurately clean and
+analyze open-ended survey questions? The goal is to provide a practical
+solution for streamlining the analysis of open-ended questions in survey
+research. By leveraging open-source tools and integrating them into a
+conventional social scientist's toolkit, we aim to enhance the ability
+to extract meaningful insights from survey responses, providing an
+easy-to-implement solution for researchers. The goal is not to replace
+other methods of analyzing open-ended questions but to provide and
+validate an alternative that could be used in conjunction with other
+methods to improve the quality of the analysis.
 
 \section{Methodology}\label{methodology}
 
@@ -329,23 +325,26 @@ used to generate text, summarize documents, and perform a wide range of
 other natural language processing tasks for free. The API is designed to
 be easy to use and flexible, allowing users to customize their
 interactions with LLMs to suit their needs. Using this tool, we can
-easily clean and analyze open-ended survey questions with limited
-resources.
+potentially clean and analyze open-ended survey questions, even with
+limited resources.
 
 Ollama offers a wide range of models in their library. Smaller models
-which can be used with a typical laptop and larger models which can run
-on GPU and require more computational power. Ollama recommends a minimum
-of 8GB of RAM to run smaller 7 Billion parameters models and 16GB of RAM
-to run larger 13 Billion parameters models \citep{ollama24}.
+which can be used with a typical laptop and larger models requiring more
+computational power and GPUs. Ollama recommends a minimum of 8GB of RAM
+to run smaller 7 Billion parameters models and 16GB of RAM to run larger
+13 Billion parameters models \citep{ollama24}.
 
 \subsection{The CLELLM Package}\label{the-clellm-package}
 
-A R package that allows researchers to interact with various language
-models through Ollama's API was built for this paper. A similar package
-has already been published on CRAN by \citet{gruber_weber24}. However,
-the one presented in this paper is a little bit more flexible, allowing
-to easily change the model used between each prompts making it easier to
-pick the best model for each respective task.
+For the purpose of this paper, we built a R package that allows
+researchers to interact with various language models through Ollama's
+API. A similar package has already been published on CRAN by
+\citet{gruber_weber24}. Users can install it directly using
+\texttt{install.packages("rollama")} However, the package presented in
+this paper is a little bit more flexible, and intuitive to use for
+non-ai-specialists, allowing to easily install new model and to
+alternate them between each prompts making it easier to pick the best
+model for each respective task.
 
 To install the package, users can use the following function:
 
@@ -375,8 +374,8 @@ directly in R with the following function:
 \end{Shaded}
 
 The package provides a simple functions that allow users to interact
-with LLMs through Ollama's API. The package is designed to be easy to
-use and flexible, allowing users to interact with a wide collection of
+with LLMs through Ollama's API. It is designed to be easy to use and
+flexible, allowing users to interact with a wide collection of
 open-source models the same way they would typically interact with
 OpenAI's GPT models.
 
@@ -397,6 +396,8 @@ the console. The function returns the response generated by the model.
 \subsection{Cleaning Open-Ended
 Questions}\label{cleaning-open-ended-questions}
 
+\subsubsection{Issue Categorization}\label{issue-categorization}
+
 Cleaning open-ended questions is a crucial step in the analysis of
 survey data. It involves removing irrelevant information, correcting
 errors, and standardizing the responses. This process can be
@@ -408,26 +409,173 @@ To validate if open-source LLMs with limited parameters can be used to
 clean open-ended questions, we will run issue categorization on a subset
 of 200 respondents drawn randomly from the 2021 Canadian Election Study.
 The respondents were asked ``What is the most important issue to you
-personally in this federal election?'' and could answer freely.
+personally in this federal election?'' and could answer freely. The goal
+of the analysis is to classify the responses into a set of
+pre-determined issue categories. For this paper, the 12 issues from
+ULaval's Center for Public Policy Analysis (CAPP) were used but any set
+of categories could be used. A human coder classified the open-ended
+responses into the 12 categories which will serve as a benchmark for the
+model's performance. For the purpose of this paper, the score of the
+human coder will be considered as the ground truth and set at 100\%. The
+model's performance will be measured by comparing its classification to
+the human coder's classification.
 
-For this task, the open-source mistral model by \citet{jiang_etal23} was
-used to analyze the answer and classify it into one of the following 12
-issue categories: ``Law and Crime'', ``Culture and Nationalism'',
-``Public Lands and Agriculture'', ``Governments and Governance'',
-``Immigration'', ``Rights, Liberties, Minorities, and Discrimination'',
-``Health and Social Services'', ``Economy and Employment'',
-``Education'', ``Environment and Energy''. ``International Affairs and
-Defense'', ``Technology''
+To validate if open-source large language models (LLMs) with limited
+parameters can be used to clean open-ended questions, we will run issue
+categorization on a subset of 200 respondents drawn randomly from the
+2021 Canadian Election Study. The respondents were asked, ``What is the
+most important issue to you personally in this federal election?'' and
+could answer freely. The goal of the analysis is to classify the
+responses into a set of predetermined issue categories. For this paper,
+the 12 issues from ULaval's Center for Public Policy Analysis (CAPP)
+were used, although any set of categories could be employed. Depending
+on the needs of the research or the researcher, any set of categories
+can be utilized, providing flexibility and adaptability in the analysis.
 
-The model was run on a desktop with 16GB of RAM, a Intel i5-4690K CPU
-and a GTX 1660 TI GPU. Relatively old hardware that is still able to run
-the model without any issues.
+A human coder classified the open-ended responses into the 12
+categories, which will serve as a benchmark for the model's performance.
+For the purpose of this paper, the score of the human coder will be
+considered the ground truth and set at 100\%. The model's performance
+will be measured by comparing its classification to the human coder's
+classification.
 
-\section{Results}\label{results}
+Three open-source models will be asked to classify the responses:
+mistral from \citet{jiang_etal23}, llama3 from \citet{meta24}, and
+phi3:mini from \citet{abdin_etal24}. For comparison, gpt-4-turbo from
+\citet{openai23b}, the most capable model available on the market at the
+moment of writing this paper, will also be given the same task. Although
+the quality of its ouputs are notoriously superior to any other models,
+it is not free to use and requires paid API access to run.
+
+Each models will be asked to classify the responses into one of the 12
+issue categories. They will all be given the exact same prompt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prompt }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following "}\NormalTok{,}\FunctionTok{length}\NormalTok{(issues) ,}\StringTok{" categories it belongs: "}\NormalTok{,issues\_string,}\StringTok{". Use your judgement and only output a single issue category. The answer your need to categorize is: "}\NormalTok{, data}\SpecialCharTok{$}\NormalTok{open\_ended\_issue[i], }\StringTok{"."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The models were run on a desktop with 16GB of RAM, an Intel i5-4690K
+CPU, and a GTX 1660 TI GPU. This relatively old hardware is still able
+to run the models without any issues.
+
+\paragraph{Categorization Results}\label{categorization-results}
+
+\subsubsection{Named Entity Recognition with Larger
+Prompts}\label{named-entity-recognition-with-larger-prompts}
+
+Named entity recognition (NER) is a subtask of information extraction
+that seeks to locate and classify named entities in text into predefined
+categories such as names of persons, organizations, locations,
+expressions of time, quantities, monetary values, percentages, etc. NER
+is a crucial step in the analysis of open-ended questions as it allows
+researchers to identify and extract relevant information from the text
+\citep{yadav_bethard19}. By using large language models (LLMs), we can
+streamline this process.
+
+We will try to feed LLaMA3, the open-source model that obtained the
+highest score in the issue categorization task, with a larger prompt to
+see if it can perform NER on the same subset of 200 respondents drawn
+randomly from the 2021 Canadian Election Study, and compare it with a
+human coder and with GPT-4-Turbo. The models were asked to extract the
+names of politicians, political parties, ministries, and organizations
+from the responses with the following prompt:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prompt }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}
+    \StringTok{"You are an AI trained to identify named entities in text. "}\NormalTok{,}
+    \StringTok{"In the context of a Canadian election survey, respondents were asked, "}\NormalTok{,}
+    \StringTok{"}\SpecialCharTok{\textbackslash{}"}\StringTok{What is the most important issue to you in this election?}\SpecialCharTok{\textbackslash{}"}\StringTok{ "}\NormalTok{,}
+    \StringTok{"Your task is to extract the named entities mentioned in each response, "}\NormalTok{,}
+    \StringTok{"categorizing them into appropriate types such as politicians, political parties, ministries, and organizations.}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Here are some example responses:}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"1. }\SpecialCharTok{\textbackslash{}"}\StringTok{I support the policies of Justin Trudeau.}\SpecialCharTok{\textbackslash{}"\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"2. }\SpecialCharTok{\textbackslash{}"}\StringTok{The Liberal Party\textquotesingle{}s stance on healthcare is important to me.}\SpecialCharTok{\textbackslash{}"\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"3. }\SpecialCharTok{\textbackslash{}"}\StringTok{I believe the Ministry of Health needs to focus on mental health services.}\SpecialCharTok{\textbackslash{}"\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"4. }\SpecialCharTok{\textbackslash{}"}\StringTok{Organizations like Greenpeace are crucial for climate change advocacy.}\SpecialCharTok{\textbackslash{}"\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"5. }\SpecialCharTok{\textbackslash{}"}\StringTok{Andrew Scheer\textquotesingle{}s approach to the economy resonates with me.}\SpecialCharTok{\textbackslash{}"\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"For each response, identify and categorize the named entities as follows:}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response 1:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"{-} Politicians: Justin Trudeau}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response 2:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"{-} Political Parties: Liberal Party}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response 3:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"{-} Ministries: Ministry of Health}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response 4:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"{-} Organizations: Greenpeace}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response 5:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+    \StringTok{"{-} Politicians: Andrew Scheer}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Now, extract the named entities for the following response:}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response: }\SpecialCharTok{\textbackslash{}"}\StringTok{"}\NormalTok{, data}\SpecialCharTok{$}\NormalTok{open\_ended\_issue[i], }\StringTok{"}\SpecialCharTok{\textbackslash{}"\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  
+    \StringTok{"Response 1:"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Categorization Results}\label{categorization-results-1}
 
 \section{Discussion}\label{discussion}
 
+Open-ended question have a lot of potential. Beyond the fact that they
+allow for more detailed and nuanced responses than closed-ended
+questions, they can also help researchers to better understand the
+attitudes and opinions of respondents through time and to identify
+emerging issues and trends. Indeed, allowing respondents to answer
+freely can help researchers to identify new issues and trends before
+they start to appear in closed-ended questions.
+
+Furthermore, being able to harness the power of large language models
+locally, for free, can allow researchers working with sensitive data to
+be compliant with strict ethical guidelines. Indeed, by running the
+models locally, researchers can ensure that the data is not being shared
+with third parties and that it is not being used for any other purposes
+than the one intended. This can help to protect the privacy of
+respondents and to ensure that the data is being used in a responsible
+and ethical manner while still benefiting from the power of large
+language models.
+
+There are many more applications to be tested with open-ended questions
+and large language models. For example, sentiment analysis, topic
+modeling, and summarization could all be tested to see if they can be
+used to analyze open-ended questions.
+
+This solution doesn't solve all the problems related to open-ended
+questions. It is still hard to find respondents willing to answer
+open-ended questions, and the quality of the responses can vary greatly.
+
+Close-ended question still have a role to play in survey research. They
+are easier to analyze and quantify in bulk, and they can be used to
+validate the results obtained by comparing them with other surveys
+asking the same questions, they are practical in building scales and
+indexes to measure latent variables.
+
 \section{Conclusion}\label{conclusion}
+
+The method works but is still limited by how difficult is it to limit
+the output of small models. Models were hard to prompt and outputs were
+often ridden with irrelevant information. Cleaning the output
+programmaticaly with conventional methods introduced many erroneous
+results. The models could have scored better if the output was cleaned
+manually. The issue was less present with the larger model, GPT-4-Turbo,
+but it is not free to use and requires paid API access to run.
+
+The next step of this projet is to test the capabilities of this method
+on a whole survey where respondents are asked only open questions.
+
+\newpage{}
 
 
 \renewcommand\refname{References}
