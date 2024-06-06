@@ -94,12 +94,11 @@ for (i in 1:nrow(data)) {
 
 saveRDS(data, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean_ner.rds")
 
-
 # NER GPT4
 
 data$ner_gpt4 <- NA
 
-for (i in 1:nrow(data)) {
+for (i in 186:nrow(data)) {
   
   system <- "You are a Name Entity Recognition (NER) model."
   
@@ -181,3 +180,8 @@ for (i in 1:nrow(data)) {
 
   print(paste0(i, " was \"", data$open_ended_issue[i], "\" and is now marked as \"", ifelse(is.na(detected_issue), "NA", detected_issue), "\"."))
 }
+
+saveRDS(data, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean_ner.rds")
+
+table(data$ner_llama3, useNA = "ifany")
+table(data$ner_gpt4, useNA = "ifany")
