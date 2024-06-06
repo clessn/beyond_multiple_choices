@@ -52,10 +52,10 @@ f_scores_combined <- f_scores_combined %>%
   bind_rows(mean_f_scores)
 
 # Generate the LaTeX table
-latex_table <- kable(f_scores_combined, format = "latex", booktabs = TRUE, 
-                     caption = "F Scores for each model by issue category.",
-                     col.names = c("Issue Category", "Llama3", "Phi3", "Mistral", "GPT-4", "Dict"))
+latex_table <- kable(f_scores_combined, format = "markdown", booktabs = TRUE, 
+                     col.names = c("Issue Category", "Llama3", "Phi3:mini", "Mistral", "GPT-4", "Dictionary"))
 
 # Print the LaTeX table
 print(latex_table)
 
+caption = "F Scores for each model by issue category.",
