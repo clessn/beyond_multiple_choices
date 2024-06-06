@@ -23,7 +23,7 @@ accuracy_dict <- calculate_accuracy(data, "issue_category_human", "issue_categor
 
 # Combine accuracy into a data frame
 accuracy_data <- data.frame(
-  Model = c("Human (Ground Truth)", "Llama3", "Phi3", "Mistral", "GPT-4", "Dictionary"),
+  Model = c("Human (Ground Truth)", "Llama3", "Phi3:mini", "Mistral", "GPT-4", "Dictionary"),
   Accuracy = c(100, accuracy_llama3, accuracy_phi3, accuracy_mistral, accuracy_gpt4, accuracy_dict)
 )
 

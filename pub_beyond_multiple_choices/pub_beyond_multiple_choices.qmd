@@ -119,58 +119,71 @@ prompt <- paste0("In this survey question, respondents had to name their most im
 ```
 The models were run on a desktop with 16GB of RAM, an Intel i5-4690K CPU, and a GTX 1660 TI GPU. This relatively old hardware is still able to run the models without any issues.
 
+A dictionnary analysis will also be run on the responses for comparison purposes. Dictionnary analysis are easy to implement and can be used to quickly analyze open-ended questions. However, they are limited in scope and can only be used to analyze responses that contain specific keywords. They are not able to analyze responses that do not contain the keywords, limiting their utility in analyzing short open-ended questions without a lot of context. The dictionnary used for this analysis was built by the CAPP and contains 1374 keywords for the 12 issues. They are based on @sevenans_etal14 Comparative Agenda Project and have been modified to fit the Canadian context by a team of human coders from the CAPP.
+
 ## Results
+
+![Distribution of Issues by the Human Coder](graphs/issue_distribution.png){#fig-distribution width=80% fig-align="center"}
+
+From the random sample of 200 respondents, the most important issue to them personally in the 2021 Canadian federal election was the economy and employment (n = 70), followed by health and social services (n = 53), and Governments and Governance (n = 34). The least important issues that were not mentioned by any respondents were Technology, International Affairs and Defense, and Public Lands and Agriculture.The distribution of issues by the human coder is shown in @fig-distribution.
 
 ### Accuracy
 
-![Models accuracy in issue categorization](graphs/accuracy.png){width=80% fig-align="center"}
+To test the accuracy of each models, the percentage of correct categorization was calculated. The results are shown in @fig-accuracy. Without surprise, the larger model, GPT-4-Turbo, scored the highest with 84% accuracy. Llama3 scored at 79.5%, followed by Phi3 at 75.5%, and Mistral at 73.5%. The dictionnary analysis scored the lowest at 19%. Those results are in line with the expectations. The larger model, GPT-4-Turbo, is known to be the most capable model available on the market at the moment of writing this paper. The smaller models, Llama3, Phi3, and Mistral, are open-source models with limited parameters. They are not as capable as GPT-4-Turbo but are still able to perform the task. The dictionnary analysis is limited in scope and does not perform well in short open-ended questions. 
+
+![Models accuracy in issue categorization](graphs/accuracy.png){#fig-accuracy width=80% fig-align="center"}
 
 ### F-Score
 
-```{=latex}
-\begin{table}[H]
+The F-score, also known as the F1-score, provides a more balanced measure of a model's performance by considering both precision and recall. Precision measures the proportion of correct positive predictions made by the model, while recall measures the proportion of actual positives that were correctly identified. The F-score is the harmonic mean of precision and recall, which ensures that both metrics are given equal weight.
 
-\caption{F Scores for each model by issue category.}
-\centering
-\begin{tabular}[t]{lrrrrr}
-\toprule
-Issue Category & Llama3 & Phi3 & Mistral & GPT-4 & Dict\\
-\midrule
-Culture and Nationalism & NA & NA & 1.00 & NA & NA\\
-Economy and Employment & 0.90 & 0.87 & NA & 0.94 & 0.21\\
-Education & 0.67 & 0.67 & 1.00 & 0.67 & NA\\
-Environment and Energy & 0.88 & 0.80 & 0.80 & 0.84 & 0.08\\
-Governments and Governance & 0.41 & 0.47 & 0.56 & 0.65 & 0.03\\
-\addlinespace
-Health and Social Services & 0.94 & 0.83 & 0.91 & 0.96 & 0.34\\
-Immigration & 1.00 & 1.00 & 1.00 & 1.00 & NA\\
-Law and Crime & 1.00 & 1.00 & 1.00 & 1.00 & NA\\
-Rights, Liberties, Minorities, and Discrimination & 0.86 & 0.86 & 0.71 & 0.57 & 0.29\\
-Mean F-score & 0.83 & 0.81 & 0.87 & 0.83 & 0.19\\
-\bottomrule
-\end{tabular}
-\end{table}
-```
+The F-scores for each model across different issue categories are summarized in @tbl-issues:
+
+::: {#tbl-issues}
+
+|Issue Category                                    | Llama3| Phi3| Mistral| GPT-4| Dictionary|
+|:-------------------------------------------------|------:|----:|-------:|-----:|----------:|
+|Culture and Nationalism                           |     NA|   NA|    1.00|    NA|         NA|
+|Economy and Employment                            |   0.90| 0.87|      NA|  0.94|       0.21|
+|Education                                         |   0.67| 0.67|    1.00|  0.67|         NA|
+|Environment and Energy                            |   0.88| 0.80|    0.80|  0.84|       0.08|
+|Governments and Governance                        |   0.41| 0.47|    0.56|  0.65|       0.03|
+|Health and Social Services                        |   0.94| 0.83|    0.91|  0.96|       0.34|
+|Immigration                                       |   1.00| 1.00|    1.00|  1.00|         NA|
+|Law and Crime                                     |   1.00| 1.00|    1.00|  1.00|         NA|
+|Rights, Liberties, Minorities, and Discrimination |   0.86| 0.86|    0.71|  0.57|       0.29|
+|Mean F-score                                      |   0.83| 0.81|    0.87|  0.83|       0.19|
+
+F Scores for each model by issue category.
+
+The F-scores demonstrate that open-source models, particularly Mistral, can effectively handle the categorization of open-ended survey responses, approaching the performance of the more advanced but paid GPT-4. The dictionary approach's consistently low scores underscore its limitations and the necessity of using more advanced NLP techniques for nuanced analysis.
+
+These findings suggest that while GPT-4 remains the most accurate, open-source models like Mistral, Llama3, and Phi3 are viable alternatives for researchers, especially when cost or data privacy are concerns. The results also highlight the variability in model performance across different issue categories, emphasizing the importance of choosing the right model based on the specific context and requirements of the survey analysis.
+:::
 
 # Discussion
 
-Open-ended question have a lot of potential. Beyond the fact that they allow for more detailed and nuanced responses than closed-ended questions, they can also help researchers to better understand the attitudes and opinions of respondents through time and to identify emerging issues and trends. Indeed, allowing respondents to answer freely can help researchers to identify new issues and trends before they start to appear in closed-ended questions. 
+Open-ended questions hold significant potential in survey research. Beyond allowing for more detailed and nuanced responses than closed-ended questions, they enable researchers to gain a deeper understanding of the attitudes and opinions of respondents over time and to identify emerging issues and trends. Allowing respondents to answer freely can help researchers pinpoint new issues and trends before they surface in closed-ended questions.
 
-Furthermore, being able to harness the power of large language models locally, for free, can allow researchers working with sensitive data to be compliant with strict ethical guidelines. Indeed, by running the models locally, researchers can ensure that the data is not being shared with third parties and that it is not being used for any other purposes than the one intended. This can help to protect the privacy of respondents and to ensure that the data is being used in a responsible and ethical manner while still benefiting from the power of large language models.
+Furthermore, the ability to harness the power of large language models (LLMs) locally and for free can enable researchers to work with sensitive data while adhering to strict ethical guidelines. By running the models locally, researchers can ensure that the data is not shared with third parties and is used solely for its intended purpose. This practice helps protect the privacy of respondents and ensures that the data is handled responsibly and ethically, all while benefiting from the capabilities of LLMs.
 
-There are many more applications to be tested with open-ended questions and large language models. For example, sentiment analysis, topic modeling, and summarization could all be tested to see if they can be used to analyze open-ended questions.
+There are numerous additional applications to explore with open-ended questions and LLMs, such as sentiment analysis, topic modeling, and summarization. These applications could further enhance the analysis of open-ended questions.
 
-This solution doesn't solve all the problems related to open-ended questions. It is still hard to find respondents willing to answer open-ended questions, and the quality of the responses can vary greatly. 
+However, this solution does not address all the challenges associated with open-ended questions. It remains difficult to find respondents willing to answer open-ended questions, and the quality of the responses can vary greatly. Close-ended questions still play a crucial role in survey research. They are easier to analyze and quantify in bulk, and they can be used to validate results by comparing them with other surveys that ask the same questions. Additionally, close-ended questions are practical for building scales and indexes to measure latent variables.
 
-Close-ended question still have a role to play in survey research. They are easier to analyze and quantify in bulk, and they can be used to validate the results obtained by comparing them with other surveys asking the same questions, they are practical in building scales and indexes to measure latent variables.
-
-Named entity recognition (NER) is a subtask of information extraction that seeks to locate and classify named entities in text into predefined categories such as names of persons, organizations, locations, expressions of time, quantities, monetary values, percentages, etc. NER is a crucial step in the analysis of open-ended questions as it allows researchers to identify and extract relevant information from the text [@yadav_bethard19]. By using large language models (LLMs), we can streamline this process.
+Named entity recognition (NER) is another critical tool in the analysis of open-ended questions. NER seeks to locate and classify named entities in text into predefined categories such as names of persons, organizations, locations, expressions of time, quantities, monetary values, percentages, etc. NER is crucial for extracting relevant information from text [@yadav_bethard19]. By using LLMs, we can streamline the NER process, making it more efficient and effective.
 
 # Conclusion
 
-The method works but is still limited by how difficult is it to limit the output of small models. Models were hard to prompt and outputs were often ridden with irrelevant information. Cleaning the output programmaticaly with conventional methods introduced many erroneous results. The models could have scored better if the output was cleaned manually. The issue was less present with the larger model, GPT-4-Turbo, but it is not free to use and requires paid API access to run.
+This study demonstrates that utilizing large language models (LLMs) for the analysis of open-ended survey questions is both viable and promising. The results indicate that open-source models like Mistral, Llama3, and Phi3 can effectively categorize responses, approaching the performance levels of the more advanced GPT-4-Turbo model. This capability is especially important for researchers working with limited budgets or sensitive data, where cost and data privacy are significant concerns.
 
-The next step of this projet is to test the capabilities of this method on a whole survey where respondents are asked only open questions.
+However, the method is not without its limitations. Smaller models, while capable, often produce outputs cluttered with irrelevant information. This makes it challenging to prompt them effectively and necessitates extensive cleaning, which, when done programmatically, can introduce errors. Manual cleaning of the output could potentially enhance the models' performance but at the cost of increased labor and time. The larger GPT-4-Turbo model showed fewer issues in this regard, but its usage comes with financial costs and dependency on paid API access.
+
+The potential of open-ended questions to capture detailed and nuanced responses highlights their value in survey research. They offer insights that closed-ended questions cannot, helping researchers understand respondent attitudes and identify emerging trends. The ability to run LLMs locally also ensures compliance with ethical guidelines, safeguarding respondent privacy and data integrity.
+
+Future research should focus on refining these methods and exploring additional applications such as sentiment analysis, topic modeling, and summarization. Moreover, it is essential to test the capabilities of these models on larger surveys composed entirely of open-ended questions. This would provide a comprehensive understanding of their effectiveness and practical utility in real-world survey research scenarios.
+
+In conclusion, while there are challenges to overcome, the integration of LLMs in the analysis of open-ended survey questions holds significant promise. It represents a meaningful advancement in the toolkit available to social scientists, offering a scalable and efficient solution to transform qualitative data into actionable insights.
 
 {{< pagebreak >}}
 # References {-}
