@@ -24,6 +24,16 @@ author:
           city: Québec
           state: Québec
           postal-code: G1V 0A6
+  - name: Étienne Proulx
+    email: etienne.proulx.2@ulaval.ca
+    affiliations:
+        - id: ULaval
+          name: Université Laval
+          department: Département de science politique
+          address: 2325 Rue de l'Université, Québec, QC G1V 0A6
+          city: Québec
+          state: Québec
+          postal-code: G1V 0A6
   - name: Yannick Dufresne
     email: yannick.dufresne@pol.ulaval.ca
     affiliations:
@@ -54,6 +64,8 @@ format:
 ---
 
 # Introduction
+
+<!-- Parler d'opinion publique --> 
 
 Open-ended survey questions are notoriously difficult to analyze. In 1932, Rensis Likert published a seminal article in the Archives of Psychology, introducing a new method to measure the intensity of agreement or disagreement with a statement. The author underlined the difficulty of measuring attitudes since "it is possible to group stimuli in almost any conceivable manner and to classify and subclassify them indefinitely, it is strictly true that the number of attitudes which any given person possesses is almost infinite" [@likert32]. Today, most surveys are composed of a majority of close-ended questions, and open-ended questions are rarely analyzed, even if they are included in the survey [@roberts_etal14]. Indeed, implementing open-ended questions in a survey comes with a host of challenges. Respondents often skip them because they are time-consuming and require more effort and reflection than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 French and English Canadian respondents^[This survey was conducted by Leger's Leo panel and financed by the Center for Public Policy Analysis (CAPP). Deployed between April 24 and May 23, 2024. Quotas were put it place to maximize the survey's representativity]. People were asked, "What is your favourite band or musician?" The most popular answer chosen by 75 respondents, The Beatles, was written in 10 different ways: the beatles, The Beatles, The beatles, The Bwatles, beatles, Beatles, beetles, Beetles, les beattels, and Les Beatles. Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14; @bradburn_etal04; @roberts_etal14;@schuman_presser96].
 
@@ -192,7 +204,6 @@ To test the accuracy of each models, the percentage of correct categorization wa
 
 ### F-Score
 
-Accuracy is often not the best metric to evaluate the performance of a model. One of its disadvantages is that it does not provide information on the performance of a classifier in each class separately [@obi23]. It also does not account for when there is an imbalance of classes in the dataset, like in the case of our dataset where economy and employment is by far the most mentioned issue. The F-score, also known as the F1-score, provides a more balanced measure of a model's performance by considering both precision and recall. Precision measures the proportion of correct positive predictions made by the model, while recall measures the proportion of actual positives that were correctly identified. The F-score is the harmonic mean of precision and recall, which ensures that both metrics are given equal weight [@christen_etal24].
 Accuracy is often not the best metric to evaluate the performance of a model. One of its disadvantages is that it does not provide information on the performance of a classifier in each class separately [@obi23]. It also does not account for when there is an imbalance of classes in the dataset, like in the case of our dataset where economy and employment is by far the most mentioned issue. The F-score, also known as the F1-score, provides a more balanced measure of a model's performance by considering both precision and recall. Precision measures the proportion of correct positive predictions made by the model, while recall measures the proportion of actual positives that were correctly identified. The F-score is the harmonic mean of precision and recall, which ensures that both metrics are given equal weight [@christen_etal24].
 
 The F-scores for each model across different issue categories are summarized in @tbl-issues:
