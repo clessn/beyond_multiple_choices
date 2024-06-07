@@ -249,7 +249,7 @@ subclassify them indefinitely, it is strictly true that the number of
 attitudes which any given person possesses is almost infinite''
 \citep{likert32}. Today, most surveys are composed of a majority of
 close-ended questions, and open-ended questions are rarely analyzed,
-even if they are included in the survey \citep{Roberts_2014}. Indeed,
+even if they are included in the survey \citep{roberts_etal14}. Indeed,
 implementing open-ended questions in a survey comes with a host of
 challenges. Respondents often skip them because they are time-consuming
 and require more effort and reflection than closed-ended questions. It
@@ -259,15 +259,16 @@ difficult to analyze because they require manual coding and
 categorization of the responses. Indeed, many respondents can give the
 same answer written in different ways. In a 2024 pilot survey about
 lifestyle and health given to 2000 French and English Canadian
-respondents\footnote{This survey was conducted by Leger's Leo panel.
-  Administrated between April 24 and May 23, 2024. Quotas were put it
-  place to maximize the survey's representativity}. People were asked,
-``What is your favourite band or musician?'' The most popular answer
-chosen by 75 respondents, The Beatles, was written in 10 different ways:
-the beatles, The Beatles, The beatles, The Bwatles, beatles, Beatles,
-beetles, Beetles, les beattels, and Les Beatles. Grammatical errors,
-typos, and misspellings can make it difficult to analyze the data. While
-it is not impossible to analyze open-ended questions, it is generally
+respondents\footnote{This survey was conducted by Leger's Leo panel and
+  financed by the Center for Public Policy Analysis (CAPP). Deployed
+  between April 24 and May 23, 2024. Quotas were put it place to
+  maximize the survey's representativity}. People were asked, ``What is
+your favourite band or musician?'' The most popular answer chosen by 75
+respondents, The Beatles, was written in 10 different ways: the beatles,
+The Beatles, The beatles, The Bwatles, beatles, Beatles, beetles,
+Beetles, les beattels, and Les Beatles. Grammatical errors, typos, and
+misspellings can make it difficult to analyze the data. While it is not
+impossible to analyze open-ended questions, it is generally
 time-consuming and expensive, especially when dealing with large
 datasets
 \citep{dillman_etal14, bradburn_etal04, roberts_etal14, schuman_presser96}.
@@ -282,7 +283,10 @@ respondents into thinking of issues in terms of particular causes or
 treatments, which can be a problem with closed-ended questions
 \citep{roberts_etal14, iyengar96}. Open-ended questions can help
 researchers to better understand the attitudes and opinions of
-respondents and to identify emerging issues and trends.
+respondents and to identify emerging issues and trends. Since
+respondents can answer freely, researchers can pinpoint new issues and
+trends before they surface in closed-ended questions, allowing for a
+more organic and nuanced understanding of public opinion.
 
 According to \citet{bickman_rog09}, open-ended questions align with
 qualitative data, requiring in-depth analysis and interpretation, while
@@ -297,6 +301,35 @@ phenomena.
 
 \section{Cleaning and Analyzing Open-Ended
 Questions}\label{cleaning-and-analyzing-open-ended-questions}
+
+There are many ways to analyze open-ended questions. The most popular
+method is to manually code and categorize the responses. This method is
+time-consuming, labor-intensive, and prone to human error, but it is
+also the most accurate trustworthy \citep{roberts_etal14}.
+Programmatical methods can also be used to streamline analysis with
+various degrees of precision. \citet{grimmer_etal13} lists various text
+as data methods to utilize depending on their use case as shown in
+Figure~\ref{fig-methods}.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{pub_beyond_multiple_choices_files/figure-latex/mermaid-figure-1.png}
+
+}
+
+\caption{\label{fig-methods}Grimmer (2013) overview of text as data
+methods.}
+
+\end{figure}%
+
+These automated methods require various degrees of effort to learn,
+understand, and implement. The goal of this paper is not to replace any
+of these methods or to pretend that the one offered is superior but to
+provide an easy to use alternative that is versatile, that can be
+implemented in different contexts, and that can be used in conjunction
+with other methods to improve the quality of the analysis.
 
 \section{Research Question}\label{research-question}
 
@@ -338,7 +371,9 @@ to run smaller 7 Billion parameters models and 16GB of RAM to run larger
 
 For the purpose of this paper, we built a R package that allows
 researchers to interact with various language models through Ollama's
-API. A similar package has already been published on CRAN by
+API\footnote{The package is accessible at
+  https://github.com/clessn/clellm. Feel free to modify it and send pull
+  requests.}. A similar package has already been published on CRAN by
 \citet{gruber_weber24}. Users can install it directly using
 \texttt{install.packages("rollama")} However, the package presented in
 this paper is a little bit more flexible, and intuitive to use for
@@ -383,7 +418,7 @@ OpenAI's GPT models.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{clellm}\SpecialCharTok{::}\FunctionTok{ollama\_prompt}\NormalTok{(}\StringTok{"prompt"}\NormalTok{, }\AttributeTok{model =} \StringTok{"model\_name"}\NormalTok{, }\AttributeTok{format =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{print\_result =} \ConstantTok{TRUE}\NormalTok{) }
+\NormalTok{clellm}\SpecialCharTok{::}\FunctionTok{ollama\_prompt}\NormalTok{(}\StringTok{"prompt"}\NormalTok{, }\AttributeTok{model =} \StringTok{"model\_name"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -527,24 +562,30 @@ open-ended questions.
 
 \subsubsection{F-Score}\label{f-score}
 
-The F-score, also known as the F1-score, provides a more balanced
-measure of a model's performance by considering both precision and
-recall. Precision measures the proportion of correct positive
-predictions made by the model, while recall measures the proportion of
-actual positives that were correctly identified. The F-score is the
-harmonic mean of precision and recall, which ensures that both metrics
-are given equal weight.
+Accuracy is often not the best metric to evaluate the performance of a
+model. One of its disadvantages is that it does not provide information
+on the performance of a classifier in each class separately
+\citep{obi23}. It also does not account for when there is an imbalance
+of classes in the dataset, like in the case of our dataset where economy
+and employment is by far the most mentioned issue. The F-score, also
+known as the F1-score, provides a more balanced measure of a model's
+performance by considering both precision and recall. Precision measures
+the proportion of correct positive predictions made by the model, while
+recall measures the proportion of actual positives that were correctly
+identified. The F-score is the harmonic mean of precision and recall,
+which ensures that both metrics are given equal weight
+\citep{christen_etal24}.
 
 The F-scores for each model across different issue categories are
 summarized in Table~\ref{tbl-issues}:
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.5747}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0805}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0575}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0920}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0690}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1264}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.5682}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0795}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0568}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0795}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1250}}@{}}
 \caption{F Scores for each model by issue
 category.}\label{tbl-issues}\tabularnewline
 \toprule\noalign{}
