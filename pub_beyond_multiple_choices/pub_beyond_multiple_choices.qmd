@@ -55,7 +55,7 @@ format:
 
 # Introduction
 
-Open-ended survey questions are notoriously difficult to analyze. In 1932, Rensis Likert published a seminal article in the Archives of Psychology, introducing a new method to measure the intensity of agreement or disagreement with a statement. The author underlined the difficulty of measuring attitudes. He wrote that "since it is possible to group stimuli in almost any conceivable manner and to classify and subclassify them indefinitely, it is strictly true that the number of attitudes which any given person possesses is almost infinite" [@likert32]. Today, most surveys are composed of a majority of close-ended questions, and open-ended questions are rarely analyzed, even if they are included in the survey [@Roberts_2014]. Indeed, implementing open-ended questions in a survey comes with a host of challenges. Respondents often skip them because they are time-consuming and require more effort and reflection than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 French and English Canadian respondents^[This survey was conducted by Leger's Leo panel and financed by the Center for Public Policy Analysis (CAPP). Deployed between April 24 and May 23, 2024. Quotas were put it place to maximize the survey's representativity]. People were asked, "What is your favourite band or musician?" The most popular answer chosen by 75 respondents, The Beatles, was written in 10 different ways: the beatles, The Beatles, The beatles, The Bwatles, beatles, Beatles, beetles, Beetles, les beattels, and Les Beatles. Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14; @bradburn_etal04; @roberts_etal14;@schuman_presser96].
+Open-ended survey questions are notoriously difficult to analyze. In 1932, Rensis Likert published a seminal article in the Archives of Psychology, introducing a new method to measure the intensity of agreement or disagreement with a statement. The author underlined the difficulty of measuring attitudes. He wrote that "since it is possible to group stimuli in almost any conceivable manner and to classify and subclassify them indefinitely, it is strictly true that the number of attitudes which any given person possesses is almost infinite" [@likert32]. Today, most surveys are composed of a majority of close-ended questions, and open-ended questions are rarely analyzed, even if they are included in the survey [@roberts_etal14]. Indeed, implementing open-ended questions in a survey comes with a host of challenges. Respondents often skip them because they are time-consuming and require more effort and reflection than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 French and English Canadian respondents^[This survey was conducted by Leger's Leo panel and financed by the Center for Public Policy Analysis (CAPP). Deployed between April 24 and May 23, 2024. Quotas were put it place to maximize the survey's representativity]. People were asked, "What is your favourite band or musician?" The most popular answer chosen by 75 respondents, The Beatles, was written in 10 different ways: the beatles, The Beatles, The beatles, The Bwatles, beatles, Beatles, beetles, Beetles, les beattels, and Les Beatles. Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14; @bradburn_etal04; @roberts_etal14;@schuman_presser96].
 
 However, open-ended questions can provide valuable insights into the attitudes, opinions, and perceptions of respondents. They allow for more detailed and nuanced responses than closed-ended questions. They avoid the problem of forcing respondents to choose between a limited number of options, which may not capture the full range of their opinions [@dillman_etal14]. Open-ended questions can avoid cueing respondents into thinking of issues in terms of particular causes or treatments, which can be a problem with closed-ended questions [@roberts_etal14; @iyengar96]. Open-ended questions can help researchers to better understand the attitudes and opinions of respondents and to identify emerging issues and trends. Since respondents can answer freely, researchers can pinpoint new issues and trends before they surface in closed-ended questions, allowing for a more organic and nuanced understanding of public opinion.
 
@@ -63,7 +63,60 @@ According to @bickman_rog09, open-ended questions align with qualitative data, r
 
 # Cleaning and Analyzing Open-Ended Questions
 
+There are many ways to analyze open-ended questions. The most popular method is to manually code and categorize the responses. This method is time-consuming, labor-intensive, and prone to human error, but it is also the most accurate trustworthy [@roberts_etal14]. Programmatical methods can also be used to streamline analysis with various degrees of precision. @grimmer_etal13 lists various text as data methods to utilize depending on their use case as shown in @fig-methods.
 
+```{mermaid}
+%%| fig-width: 100%
+%%| label: fig-methods
+%%| fig-cap: "Grimmer (2013) overview of text as data methods."
+flowchart TD
+    A[Acquire Documents]
+    B[Preprocess]
+    C[Research Objective]
+    D[Classification]
+    E[Ideological Scaling]
+    E1[Supervised - Wordscore]
+    E2[Unsupervised - Wordfish]
+    F[Known Categories]
+    G[Unknown Categories]
+    F1[Dictionary Methods]
+    F2[Supervised Methods]
+    F21[Individual Classification]
+    F22[Measuring Proportions - ReadMe]
+    F211[Individual Methods]
+    F212[Ensembles]
+    G1[Fully Automated Clustering]
+    G2[Computer Assisted Clustering]
+    G11[Single Membership Models]
+    G12[Mixed Membership Models]
+    G111[Document Level - LDA]
+    G121[Date Level - Dynamic Multitopic Model]
+    G122[Author Level - Expressed Agenda Model]
+
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    E --> E1
+    E --> E2
+    D --> F
+    D --> G
+    F --> F1
+    F --> F2
+    F2 --> F21
+    F2 --> F22
+    F21 --> F211
+    F21 --> F212
+    G --> G1
+    G --> G2
+    G1 --> G11
+    G1 --> G12
+    G11 --> G111
+    G12 --> G121
+    G12 --> G122
+```
+
+These automated methods require various degrees of effort to learn, understand, and implement. The goal of this paper is not to replace any of these methods or to pretend that the one offered is superior but to provide an easy to use alternative that is versatile, that can be implemented in different contexts, and that can be used in conjunction with other methods to improve the quality of the analysis.
 
 # Research Question
 
@@ -79,7 +132,7 @@ Ollama offers a wide range of models in their library. Smaller models which can 
 
 ## The CLELLM Package
 
-For the purpose of this paper, we built a R package that allows researchers to interact with various language models through Ollama's API. A similar package has already been published on CRAN by @gruber_weber24. Users can install it directly using `install.packages("rollama")` However, the package presented in this paper is a little bit more flexible, and intuitive to use for non-ai-specialists, allowing to easily install new models and to alternate between them between each prompts making it easier to pick the best model for each respective task. Ollama has an extensive library of models that can be used for a wide range of natural language processing tasks.
+For the purpose of this paper, we built a R package that allows researchers to interact with various language models through Ollama's API^[The package is accessible at https://github.com/clessn/clellm. Feel free to modify it and send pull requests.]. A similar package has already been published on CRAN by @gruber_weber24. Users can install it directly using `install.packages("rollama")` However, the package presented in this paper is a little bit more flexible, and intuitive to use for non-ai-specialists, allowing to easily install new models and to alternate between them between each prompts making it easier to pick the best model for each respective task. Ollama has an extensive library of models that can be used for a wide range of natural language processing tasks.
 
 To install the package, users can use the following function:
 
@@ -101,7 +154,7 @@ clellm::ollama_install_model("model_name")
 The package provides a simple functions that allow users to interact with LLMs through Ollama's API. It is designed to be easy to use and flexible, allowing users to interact with a wide collection of open-source models the same way they would typically interact with OpenAI's GPT models. 
 
 ```r
-clellm::ollama_prompt("prompt", model = "model_name", format = NULL, print_result = TRUE) 
+clellm::ollama_prompt("prompt", model = "model_name")
 ```
 The functions takes in four arguments, the prompt, the model to use, the format of the output, and whether to print the result. The `prompt` argument is the text that the model will use to generate a response. `model` is the name of the model to use. `format` is the format of the output, which can be either "json" or "text". The `print_result` argument is a logical value that determines whether the result should be printed to the console. The function returns the response generated by the model.
 
@@ -139,24 +192,24 @@ To test the accuracy of each models, the percentage of correct categorization wa
 
 ### F-Score
 
-The F-score, also known as the F1-score, provides a more balanced measure of a model's performance by considering both precision and recall. Precision measures the proportion of correct positive predictions made by the model, while recall measures the proportion of actual positives that were correctly identified. The F-score is the harmonic mean of precision and recall, which ensures that both metrics are given equal weight.
+Accuracy is often not the best metric to evaluate the performance of a model. One of its disadvantages is that it does not provide information on the performance of a classifier in each class separately [@obi23]. It also does not account for when there is an imbalance of classes in the dataset, like in the case of our dataset where economy and employment is by far the most mentioned issue. The F-score, also known as the F1-score, provides a more balanced measure of a model's performance by considering both precision and recall. Precision measures the proportion of correct positive predictions made by the model, while recall measures the proportion of actual positives that were correctly identified. The F-score is the harmonic mean of precision and recall, which ensures that both metrics are given equal weight [@christen_etal24].
 
 The F-scores for each model across different issue categories are summarized in @tbl-issues:
 
 ::: {#tbl-issues}
 
-|Issue Category                                    | Llama3| Phi3| Mistral| GPT-4| Dictionary|
-|:-------------------------------------------------|------:|----:|-------:|-----:|----------:|
-|Culture and Nationalism                           |     NA|   NA|    1.00|    NA|         NA|
-|Economy and Employment                            |   0.90| 0.87|      NA|  0.94|       0.21|
-|Education                                         |   0.67| 0.67|    1.00|  0.67|         NA|
-|Environment and Energy                            |   0.88| 0.80|    0.80|  0.84|       0.08|
-|Governments and Governance                        |   0.41| 0.47|    0.56|  0.65|       0.03|
-|Health and Social Services                        |   0.94| 0.83|    0.91|  0.96|       0.34|
-|Immigration                                       |   1.00| 1.00|    1.00|  1.00|         NA|
-|Law and Crime                                     |   1.00| 1.00|    1.00|  1.00|         NA|
-|Rights, Liberties, Minorities, and Discrimination |   0.86| 0.86|    0.71|  0.57|       0.29|
-|Mean F-score                                      |   0.83| 0.81|    0.87|  0.83|       0.19|
+|Issue Category                                    | Llama3| Phi3| Mistral|  GPT-4| Dictionary|
+|:-------------------------------------------------|------:|----:|-------:|------:|----------:|
+|Culture and Nationalism                           |     NA|   NA|    1.00|     NA|         NA|
+|Economy and Employment                            |   0.90| 0.87|      NA|   0.94|       0.21|
+|Education                                         |   0.67| 0.67|    1.00|   0.67|         NA|
+|Environment and Energy                            |   0.88| 0.80|    0.80|   0.84|       0.08|
+|Governments and Governance                        |   0.41| 0.47|    0.56|   0.65|       0.03|
+|Health and Social Services                        |   0.94| 0.83|    0.91|   0.96|       0.34|
+|Immigration                                       |   1.00| 1.00|    1.00|   1.00|         NA|
+|Law and Crime                                     |   1.00| 1.00|    1.00|   1.00|         NA|
+|Rights, Liberties, Minorities, and Discrimination |   0.86| 0.86|    0.71|   0.57|       0.29|
+|Mean F-score                                      |   0.83| 0.81|    0.87|   0.83|       0.19|
 
 F Scores for each model by issue category.
 
