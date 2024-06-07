@@ -45,7 +45,7 @@ author:
           state: Québec
           postal-code: G1V 0A6
 abstract: |
-  Analyzing open-ended survey questions presents significant challenges due to the diversity of responses and the manual effort required for coding and categorization. This paper introduces a novel approach for cleaning and analyzing open-ended questions using open-source large language models (LLMs). Leveraging the R programming language and Ollama's API, we demonstrate an efficient, cost-effective method for processing qualitative data. Our approach enhances the ability to extract meaningful insights from survey responses, providing a scalable solution for researchers. By integrating open-source tools, we offer a practical framework for transforming the analysis of open-ended questions in survey research.
+  Analyzing open-ended survey questions presents significant challenges due to the diversity of responses and the manual effort required for coding and categorization. This paper introduces a new approach for cleaning and analyzing open-ended questions using open-source large language models (LLMs). Using the R programming language and Ollama's API, we demonstrate an efficient, cost-effective method for processing qualitative data. Our approach enhances the ability to extract meaningful insights from survey responses, providing a scalable solution for researchers. By integrating open-source tools, we offer a practical framework for transforming the analysis of open-ended questions in survey research.
 keywords: 
   - Large Language Models
   - Open-Ended Survey Questions
@@ -64,8 +64,6 @@ format:
 ---
 
 # Introduction
-
-<!-- Parler d'opinion publique --> 
 
 Open-ended survey questions are notoriously difficult to analyze. In 1932, Rensis Likert published a seminal article in the Archives of Psychology, introducing a new method to measure the intensity of agreement or disagreement with a statement. The author underlined the difficulty of measuring attitudes since "it is possible to group stimuli in almost any conceivable manner and to classify and subclassify them indefinitely, it is strictly true that the number of attitudes which any given person possesses is almost infinite" [@likert32]. Today, most surveys are composed of a majority of close-ended questions, and open-ended questions are rarely analyzed, even if they are included in the survey [@roberts_etal14]. Indeed, implementing open-ended questions in a survey comes with a host of challenges. Respondents often skip them because they are time-consuming and require more effort and reflection than closed-ended questions. It can also be troublesome for mobile users to type lengthy and complex responses [@dillman_etal14]. Open-ended questions are also difficult to analyze because they require manual coding and categorization of the responses. Indeed, many respondents can give the same answer written in different ways. In a 2024 pilot survey about lifestyle and health given to 2000 French and English Canadian respondents^[This survey was conducted by Leger's Leo panel and financed by the Center for Public Policy Analysis (CAPP). Deployed between April 24 and May 23, 2024. Quotas were put it place to maximize the survey's representativity]. People were asked, "What is your favourite band or musician?" The most popular answer chosen by 75 respondents, The Beatles, was written in 10 different ways: the beatles, The Beatles, The beatles, The Bwatles, beatles, Beatles, beetles, Beetles, les beattels, and Les Beatles. Grammatical errors, typos, and misspellings can make it difficult to analyze the data. While it is not impossible to analyze open-ended questions, it is generally time-consuming and expensive, especially when dealing with large datasets [@dillman_etal14; @bradburn_etal04; @roberts_etal14;@schuman_presser96].
 
@@ -132,7 +130,7 @@ These automated methods require various degrees of effort to learn, understand, 
 
 # Research Question
 
-Can open-source language models be trusted to accurately clean and analyze open-ended survey questions? The objective is to provide a practical solution for streamlining the analysis of open-ended questions in survey research. By using open-source tools and integrating them into the conventional social scientist's toolkit, we aim to enhance the ability to extract meaningful insights from survey responses, providing an easy-to-implement solution for researchers. 
+Can open-source language models be trusted to accurately clean and analyze open-ended survey questions? The objective is to provide a practical solution for streamlining the analysis of open-ended questions in survey research. By using open-source tools and integrating them into the conventional social scientist's toolkit, we aim to enhance the ability to extract meaningful insights from survey responses, providing an easy-to-implement solution for researchers. This is a preliminary study to test the feasibility of using open-source language models for the analysis of open-ended survey questions. The results will provide insights into the potential of this approach and its limitations, guiding future research in this area.
 
 # Methodology
 
@@ -144,7 +142,7 @@ Ollama offers a wide range of models in their library. Smaller models which can 
 
 ## The CLELLM Package
 
-For the purpose of this paper, we built a R package that allows researchers to interact with various language models through Ollama's API^[The package is accessible at https://github.com/clessn/clellm. Feel free to modify it and send pull requests.]. A similar package has already been published on CRAN by @gruber_weber24. Users can install it directly using `install.packages("rollama")` However, we think that the package presented in this paper is a little bit more flexible, and intuitive to use for non-ai-specialists, allowing to easily install new models and to alternate between them between each prompts, making it easier to pick the best model for each respective task. Ollama has an extensive library of models that can be used for a wide range of natural language processing tasks.
+For the purpose of this paper, we built a R package that allows researchers to interact with various language models through Ollama's API^[The package is accessible at https://github.com/clessn/clellm. Feel free to modify it and send pull requests.]. A similar package has already been published on CRAN by @gruber_weber24. Users can install it directly using `install.packages("rollama")`. However, we think that the package presented in this paper is a little bit more flexible, and intuitive to use for non-ai-specialists, allowing to easily install new models and to alternate between them between each prompts, making it easier to pick the best model for each respective task. Ollama has an extensive library of models that can be used for a wide range of natural language processing tasks.
 
 To install the package, users can use the following function:
 
@@ -176,31 +174,25 @@ Cleaning open-ended questions is a crucial step in the analysis of survey data. 
 
 Three open-source models will be asked to classify the responses: mistral from @jiang_etal23, llama3 from @meta24, and phi3:mini from @abdin_etal24. For comparison, gpt-4-turbo from @openai23b, the most capable model available on the market at the moment of writing this paper, will also be given the same task. Although the quality of its ouputs are notoriously superior to any other models, it is not free to use and requires paid API access to run. 
 
-<!-- PARLER DE L'ANALYSE PAR DICTIONNAIRE -->
-
-<!-- PARLER DES MODÈLES PLUS -->
-
-<!-- PARLER PLUS DU CLEANING-->
-
 Each models will be asked to classify the responses into one of the 12 issue categories. They will all be given the exact same prompt.
 ```r
 prompt <- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
 ```
 The models were run on a desktop with 16GB of RAM, an Intel i5-4690K CPU, and a GTX 1660 TI GPU. This relatively old hardware is still able to run the models without any issues.
 
-A dictionnary analysis will also be run on the responses for comparison purposes. Dictionnary analysis are easy to implement and can be used to quickly analyze open-ended questions. However, they are limited in scope and can only be used to analyze responses that contain specific keywords. They are not able to analyze responses that do not contain the keywords, limiting their utility in analyzing short open-ended questions without a lot of context. The dictionnary used for this analysis was built by the CAPP and contains 1374 keywords for the 12 issues. They are based on @sevenans_etal14 Comparative Agenda Project and have been modified to fit the Canadian context by a team of human coders from the CAPP.
+A dictionnary analysis will also be run on the responses for comparison purposes. Dictionnary analysis are easy to implement and can be used to quickly analyze open-ended questions. However, they are limited in scope and can only be used to analyze responses that contain specific keywords. They are not able to analyze responses that do not contain the keywords, limiting their utility in analyzing short open-ended questions without a lot of context. This method is expected to perform poorly in this context. The dictionnary used for this analysis was built by the CAPP and contains 1374 keywords for the 12 issues. They are based on @sevenans_etal14 Comparative Agenda Project and have been modified to fit the Canadian context by a team of human coders from the CAPP.
 
 ## Results
 
-![Distribution of Issues by the Human Coder](graphs/issue_distribution.png){#fig-distribution width=80% fig-align="center"}
+![Distribution of Issues by the Human Coder](graphs/issue_distribution.png){#fig-distribution width=80% fig-align="center" fig-pos="H"}
 
 From the random sample of 200 respondents, the most important issue to them personally in the 2021 Canadian federal election was the economy and employment (n = 70), followed by health and social services (n = 53), and Governments and Governance (n = 34). The least important issues that were not mentioned by any respondents were Technology, International Affairs and Defense, and Public Lands and Agriculture. The distribution of issues by the human coder is shown in @fig-distribution.
 
 ### Accuracy
 
-To test the accuracy of each models, the percentage of correct categorization was calculated. The results are shown in @fig-accuracy. Without surprise, the larger model, GPT-4-Turbo, scored the highest with 84% accuracy. Llama3 scored at 79.5%, followed by Phi3 at 75.5%, and Mistral at 73.5%. The dictionnary analysis scored the lowest at 19%. Those results are in line with the expectations: The larger model, GPT-4-Turbo, is known to be the most capable model available on the market at the moment of writing this paper. The smaller models, Llama3, Phi3, and Mistral, are open-source models with limited parameters. They are not as capable as GPT-4-Turbo but are still able to perform the task. The dictionnary analysis is limited in scope and does not perform well in short open-ended questions. 
+To test the accuracy of each models, the percentage of correct categorization was calculated. The results are shown in @fig-accuracy. The larger model, GPT-4-Turbo, scored the highest with 84% accuracy. Llama3 scored at 79.5%, followed by Phi3 at 75.5%, and Mistral at 73.5%. The dictionnary analysis scored the lowest at 19%. Those results are in line with the expectations: The larger model, GPT-4-Turbo, is known to be the most capable model available on the market at the moment of writing this paper. The smaller models, Llama3, Phi3, and Mistral, are open-source models with limited parameters. They are not as capable as GPT-4-Turbo but are still able to perform the task. The dictionnary analysis is limited in scope and does not perform well in short open-ended questions. 
 
-![Models accuracy in issue categorization](graphs/accuracy.png){#fig-accuracy width=80% fig-align="center"}
+![Models accuracy in issue categorization](graphs/accuracy.png){#fig-accuracy width=80% fig-align="center" fig-pos="H"}
 
 ### F-Score
 
@@ -237,11 +229,9 @@ Open-ended questions hold significant potential in survey research. Beyond allow
 
 Furthermore, the ability to harness the power of large language models (LLMs) locally and for free can enable researchers to work with sensitive data while adhering to strict ethical guidelines. By running the models locally, researchers can ensure that the data is not shared with third parties and is used solely for its intended purpose. This practice helps protect the privacy of respondents and ensures that the data is handled responsibly and ethically, all while benefiting from the capabilities of LLMs.
 
-There are numerous additional applications to explore with open-ended questions and LLMs, such as sentiment analysis, topic modeling, and summarization. These applications could further enhance the analysis of open-ended questions. For example, Named entity recognition (NER) is another critical tool in the analysis of open-ended questions that could benefit from LLM analysis. NER seeks to locate and classify named entities in text into predefined categories such as names of persons, organizations, locations, expressions of time, quantities, monetary values, percentages, etc. NER is crucial for extracting relevant information from text [@yadav_bethard19]. By using LLMs, we could streamline the NER process, making it more efficient and effective.
+There are numerous additional applications to explore with open-ended questions and LLMs, such as sentiment analysis, topic modeling, and summarization. These applications could further enhance the analysis of open-ended questions. For example, Named entity recognition (NER), another critical tool in the analysis of open-ended questions, could benefit from LLM analysis. NER seeks to locate and classify named entities in text into predefined categories such as names of persons, organizations, locations, expressions of time, quantities, monetary values, percentages, etc. NER is crucial for extracting relevant information from text [@yadav_bethard19]. By using LLMs, we could streamline the NER process, making it more efficient, effective, and accessoble to researchers.
 
 However, this solution does not address all the challenges associated with open-ended questions. It remains difficult to find respondents willing to answer open-ended questions, and the quality of the responses can vary greatly. Close-ended questions still play a crucial role in survey research. They are easier to analyze and quantify in bulk, and they can be used to validate results by comparing them with other surveys that ask the same questions. Additionally, close-ended questions are practical for building scales and indexes to measure latent variables.
-
-<!-- PARLER DU SONDAGE QUESTION OUVERTE -->
 
 # Conclusion
 
@@ -251,9 +241,9 @@ However, the method is not without its limitations. Smaller models, while capabl
 
 The potential of open-ended questions to capture detailed and nuanced responses highlights their value in survey research. They offer insights that closed-ended questions cannot, helping researchers understand respondent attitudes and identify emerging trends. The ability to run LLMs locally also ensures compliance with ethical guidelines, safeguarding respondent privacy and data integrity.
 
-Future research should focus on refining these methods and exploring additional applications such as sentiment analysis, topic modeling, and summarization. Moreover, it is essential to test the capabilities of these models on larger surveys composed entirely of open-ended questions. This would provide a comprehensive understanding of their effectiveness and practical utility in real-world survey research scenarios.
+Future research should focus on refining these methods and exploring additional applications such as sentiment analysis, topic modeling, and summarization. Moreover, it would be interesting to test the capabilities of these models on larger surveys composed entirely of open-ended questions and observe if it is possible to build scales and measure latent variables in this way. This would provide a comprehensive understanding of their effectiveness and practical utility in real-world survey research scenarios. This study represents a preliminary step in this direction, offering a practical framework for integrating LLMs into the analysis of open-ended survey questions.
 
-In conclusion, while there are challenges to overcome, the integration of LLMs in the analysis of open-ended survey questions holds significant promise. It represents a meaningful advancement in the toolkit available to social scientists, offering a scalable and efficient solution to transform qualitative data into actionable insights.
+In conclusion, while there are challenges to overcome, the integration of LLMs in the analysis of open-ended survey questions holds significant promise. It represents a meaningful advancement in the toolkit available to social scientists, offering a scalable and efficient solution to transform qualitative data into actionable insights. This technology, still in its infancy, has a lot of room for growth and improvement, and its potential applications in survey research are vast and exciting.
 
 {{< pagebreak >}}
 # References {-}

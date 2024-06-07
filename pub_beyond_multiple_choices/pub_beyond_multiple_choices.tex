@@ -174,7 +174,7 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Beyond Multiple Choices},
-  pdfauthor={Laurence-Olivier M. Foisy; Hubert Cadieux; Yannick Dufresne},
+  pdfauthor={Laurence-Olivier M. Foisy; Hubert Cadieux; Étienne Proulx; Yannick Dufresne},
   pdfkeywords={Large Language Models, Open-Ended Survey
 Questions, Survey Research, Open-Source Tools},
   colorlinks=true,
@@ -198,6 +198,10 @@ with Large Language Models} }
 %
 }
  \ead{hubert.cadieux.1@ulaval.ca} 
+\author[1]{Étienne Proulx%
+%
+}
+ \ead{etienne.proulx.2@ulaval.ca} 
 \author[1]{Yannick Dufresne%
 %
 }
@@ -211,19 +215,20 @@ politique},addressline={2325 Rue de l'Université, Québec, QC G1V
 
 
 
+
         
 \begin{abstract}
 Analyzing open-ended survey questions presents significant challenges
 due to the diversity of responses and the manual effort required for
-coding and categorization. This paper introduces a novel approach for
+coding and categorization. This paper introduces a new approach for
 cleaning and analyzing open-ended questions using open-source large
-language models (LLMs). Leveraging the R programming language and
-Ollama's API, we demonstrate an efficient, cost-effective method for
-processing qualitative data. Our approach enhances the ability to
-extract meaningful insights from survey responses, providing a scalable
-solution for researchers. By integrating open-source tools, we offer a
-practical framework for transforming the analysis of open-ended
-questions in survey research.
+language models (LLMs). Using the R programming language and Ollama's
+API, we demonstrate an efficient, cost-effective method for processing
+qualitative data. Our approach enhances the ability to extract
+meaningful insights from survey responses, providing a scalable solution
+for researchers. By integrating open-source tools, we offer a practical
+framework for transforming the analysis of open-ended questions in
+survey research.
 \end{abstract}
 
 
@@ -338,7 +343,11 @@ practical solution for streamlining the analysis of open-ended questions
 in survey research. By using open-source tools and integrating them into
 the conventional social scientist's toolkit, we aim to enhance the
 ability to extract meaningful insights from survey responses, providing
-an easy-to-implement solution for researchers.
+an easy-to-implement solution for researchers. This is a preliminary
+study to test the feasibility of using open-source language models for
+the analysis of open-ended survey questions. The results will provide
+insights into the potential of this approach and its limitations,
+guiding future research in this area.
 
 \section{Methodology}\label{methodology}
 
@@ -371,7 +380,7 @@ API\footnote{The package is accessible at
   https://github.com/clessn/clellm. Feel free to modify it and send pull
   requests.}. A similar package has already been published on CRAN by
 \citet{gruber_weber24}. Users can install it directly using
-\texttt{install.packages("rollama")} However, we think that the package
+\texttt{install.packages("rollama")}. However, we think that the package
 presented in this paper is a little bit more flexible, and intuitive to
 use for non-ai-specialists, allowing to easily install new models and to
 alternate between them between each prompts, making it easier to pick
@@ -476,15 +485,16 @@ quickly analyze open-ended questions. However, they are limited in scope
 and can only be used to analyze responses that contain specific
 keywords. They are not able to analyze responses that do not contain the
 keywords, limiting their utility in analyzing short open-ended questions
-without a lot of context. The dictionnary used for this analysis was
-built by the CAPP and contains 1374 keywords for the 12 issues. They are
-based on \citet{sevenans_etal14} Comparative Agenda Project and have
-been modified to fit the Canadian context by a team of human coders from
-the CAPP.
+without a lot of context. This method is expected to perform poorly in
+this context. The dictionnary used for this analysis was built by the
+CAPP and contains 1374 keywords for the 12 issues. They are based on
+\citet{sevenans_etal14} Comparative Agenda Project and have been
+modified to fit the Canadian context by a team of human coders from the
+CAPP.
 
 \subsection{Results}\label{results}
 
-\begin{figure}
+\begin{figure}[H]
 
 \centering{
 
@@ -510,19 +520,18 @@ Figure~\ref{fig-distribution}.
 
 To test the accuracy of each models, the percentage of correct
 categorization was calculated. The results are shown in
-Figure~\ref{fig-accuracy}. Without surprise, the larger model,
-GPT-4-Turbo, scored the highest with 84\% accuracy. Llama3 scored at
-79.5\%, followed by Phi3 at 75.5\%, and Mistral at 73.5\%. The
-dictionnary analysis scored the lowest at 19\%. Those results are in
-line with the expectations: The larger model, GPT-4-Turbo, is known to
-be the most capable model available on the market at the moment of
-writing this paper. The smaller models, Llama3, Phi3, and Mistral, are
-open-source models with limited parameters. They are not as capable as
-GPT-4-Turbo but are still able to perform the task. The dictionnary
-analysis is limited in scope and does not perform well in short
-open-ended questions.
+Figure~\ref{fig-accuracy}. The larger model, GPT-4-Turbo, scored the
+highest with 84\% accuracy. Llama3 scored at 79.5\%, followed by Phi3 at
+75.5\%, and Mistral at 73.5\%. The dictionnary analysis scored the
+lowest at 19\%. Those results are in line with the expectations: The
+larger model, GPT-4-Turbo, is known to be the most capable model
+available on the market at the moment of writing this paper. The smaller
+models, Llama3, Phi3, and Mistral, are open-source models with limited
+parameters. They are not as capable as GPT-4-Turbo but are still able to
+perform the task. The dictionnary analysis is limited in scope and does
+not perform well in short open-ended questions.
 
-\begin{figure}
+\begin{figure}[H]
 
 \centering{
 
@@ -548,19 +557,7 @@ the proportion of correct positive predictions made by the model, while
 recall measures the proportion of actual positives that were correctly
 identified. The F-score is the harmonic mean of precision and recall,
 which ensures that both metrics are given equal weight
-\citep{christen_etal24}. Accuracy is often not the best metric to
-evaluate the performance of a model. One of its disadvantages is that it
-does not provide information on the performance of a classifier in each
-class separately \citep{obi23}. It also does not account for when there
-is an imbalance of classes in the dataset, like in the case of our
-dataset where economy and employment is by far the most mentioned issue.
-The F-score, also known as the F1-score, provides a more balanced
-measure of a model's performance by considering both precision and
-recall. Precision measures the proportion of correct positive
-predictions made by the model, while recall measures the proportion of
-actual positives that were correctly identified. The F-score is the
-harmonic mean of precision and recall, which ensures that both metrics
-are given equal weight \citep{christen_etal24}.
+\citep{christen_etal24}.
 
 The F-scores for each model across different issue categories are
 summarized in Table~\ref{tbl-issues}:
@@ -658,14 +655,15 @@ capabilities of LLMs.
 There are numerous additional applications to explore with open-ended
 questions and LLMs, such as sentiment analysis, topic modeling, and
 summarization. These applications could further enhance the analysis of
-open-ended questions. For example, Named entity recognition (NER) is
-another critical tool in the analysis of open-ended questions that could
+open-ended questions. For example, Named entity recognition (NER),
+another critical tool in the analysis of open-ended questions, could
 benefit from LLM analysis. NER seeks to locate and classify named
 entities in text into predefined categories such as names of persons,
 organizations, locations, expressions of time, quantities, monetary
 values, percentages, etc. NER is crucial for extracting relevant
 information from text \citep{yadav_bethard19}. By using LLMs, we could
-streamline the NER process, making it more efficient and effective.
+streamline the NER process, making it more efficient, effective, and
+accessoble to researchers.
 
 However, this solution does not address all the challenges associated
 with open-ended questions. It remains difficult to find respondents
@@ -707,17 +705,22 @@ safeguarding respondent privacy and data integrity.
 
 Future research should focus on refining these methods and exploring
 additional applications such as sentiment analysis, topic modeling, and
-summarization. Moreover, it is essential to test the capabilities of
-these models on larger surveys composed entirely of open-ended
-questions. This would provide a comprehensive understanding of their
-effectiveness and practical utility in real-world survey research
-scenarios.
+summarization. Moreover, it would be interesting to test the
+capabilities of these models on larger surveys composed entirely of
+open-ended questions and observe if it is possible to build scales and
+measure latent variables in this way. This would provide a comprehensive
+understanding of their effectiveness and practical utility in real-world
+survey research scenarios. This study represents a preliminary step in
+this direction, offering a practical framework for integrating LLMs into
+the analysis of open-ended survey questions.
 
 In conclusion, while there are challenges to overcome, the integration
 of LLMs in the analysis of open-ended survey questions holds significant
 promise. It represents a meaningful advancement in the toolkit available
 to social scientists, offering a scalable and efficient solution to
-transform qualitative data into actionable insights.
+transform qualitative data into actionable insights. This technology,
+still in its infancy, has a lot of room for growth and improvement, and
+its potential applications in survey research are vast and exciting.
 
 \newpage{}
 
