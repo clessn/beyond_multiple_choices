@@ -185,3 +185,5 @@ saveRDS(data, "data/ollama_cleaning_process/clean/ces2021_ollama_clean_ner.rds")
 
 table(data$ner_llama3, useNA = "ifany")
 table(data$ner_gpt4, useNA = "ifany")
+
+saveRDS(sondr::read_any_csv("data/ollama_cleaning_process/raw/ces2021.csv"), "data/ollama_cleaning_process/raw/ces2021.rds")

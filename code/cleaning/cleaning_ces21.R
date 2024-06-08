@@ -8,7 +8,7 @@ library(dplyr)
 # cps21_religion
 # cps21_age
 
-data <- sondr::read_any_csv("data/ollama_cleaning_process/raw/ces2021.csv")  
+data <- readRDS("data/ollama_cleaning_process/raw/ces2021.rds")  
 
 data_raw <- data |> 
   select(cps21_imp_iss, cps21_genderid, cps21_province, cps21_education, cps21_religion, cps21_income_cat, cps21_age, cps21_language_1) |> 
