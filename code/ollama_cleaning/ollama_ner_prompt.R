@@ -1,7 +1,7 @@
 library(dplyr)
 library(stringr)
 
-data <- readRDS("_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean.rds")
+data <- readRDS("data/ollama_cleaning_process/clean/ces2021_ollama_clean.rds")
 
 # Function to extract named entities from GPT output
 extract_entities <- function(gpt_output) {
@@ -181,7 +181,7 @@ for (i in 186:nrow(data)) {
   print(paste0(i, " was \"", data$open_ended_issue[i], "\" and is now marked as \"", ifelse(is.na(detected_issue), "NA", detected_issue), "\"."))
 }
 
-saveRDS(data, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean_ner.rds")
+saveRDS(data, "data/ollama_cleaning_process/clean/ces2021_ollama_clean_ner.rds")
 
 table(data$ner_llama3, useNA = "ifany")
 table(data$ner_gpt4, useNA = "ifany")

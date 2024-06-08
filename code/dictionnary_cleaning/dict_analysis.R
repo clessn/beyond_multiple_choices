@@ -5,12 +5,12 @@ library(stringr)
 
 # Load and Prepare the Data
 
-data <- readRDS("_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean_ner.rds")
+data <- readRDS("data/ollama_cleaning_process/clean/ces2021_ollama_clean_ner.rds")
 
 data$open_ended_issue <- as.character(data$open_ended_issue)
 
 # Create Issue Dictionaries
-dictionary <- read.csv("_SharedFolder_beyong_multiple_choices/data/dict/dictionnaire_merge_v1.csv", sep = ";") |> 
+dictionary <- read.csv("data/dict/dictionnaire_merge_v1.csv", sep = ";") |> 
     filter(language == "en")
 
 issue_dictionaries <- list(
@@ -68,4 +68,4 @@ print(data)
 
 # Save the Cleaned Data
 
-saveRDS(data, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean_ner_dict.rds")
+saveRDS(data, "data/ollama_cleaning_process/clean/ces2021_ollama_clean_ner_dict.rds")

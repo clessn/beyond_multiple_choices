@@ -1,7 +1,7 @@
 library(dplyr)
 library(stringr)
 
-data <- readRDS("_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_clean.rds")
+data <- readRDS("data/ollama_cleaning_process/clean/ces2021_clean.rds")
 
 # Define the issue categories
 issues <- c("Law and Crime", "Culture and Nationalism", "Public Lands and Agriculture", "Governments and Governance", 
@@ -156,4 +156,4 @@ for (i in 1:nrow(data)) {
 
 table(data$issue_category_gpt4, useNA = "ifany")
 
-saveRDS(data, "_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean.rds")
+saveRDS(data, "data/ollama_cleaning_process/clean/ces2021_ollama_clean.rds")

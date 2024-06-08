@@ -3,7 +3,7 @@ library(dplyr)
 library(ggplot2)
 
 # Load the dataset
-data <- readRDS("_SharedFolder_beyong_multiple_choices/data/ollama_cleaning_process/ces/clean/ces2021_ollama_clean_ner_dict.rds")
+data <- readRDS("data/ollama_cleaning_process/clean/ces2021_ollama_clean_ner_dict.rds")
 
 # Calculate the distribution of issue_category_human
 issue_distribution <- data %>%
