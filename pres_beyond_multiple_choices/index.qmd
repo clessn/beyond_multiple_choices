@@ -1,0 +1,51 @@
+---
+title: Beyond Multiple Choices
+subtitle: Capturing Nuanced Public Opinion with Large Language Models
+author: Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufresne
+institute: Université Laval
+format:
+  revealjs:
+    theme: night
+    logo: images/ul_logo.png
+    footer: "Beyond Multiple Choices"
+---
+
+
+## Can open-source language models be trusted to reliably clean and analyze open-ended survey questions?{#title-slide .center}
+
+
+## Pros and cons of open-ended questions{#title-slide .center .smaller}
+
+::::{.columns}
+
+:::{.column width=50%}
+
+### Pros
+
+- More depth and nuance
+
+- Doesn't limit respondent's answers
+
+- Does not cue respondents about possible causes
+
+- Allow for unexpected insights
+
+- Allow the detection of new trends
+
+:::
+
+:::{.column width=50%}
+
+### Cons
+
+- Respondants often skip open-ended questions
+
+- Troublesome for mobile users
+
+- Difficult to analyze
+
+- Time-consuming to code manually
+
+- Grammar and spelling errors
+
+:::
