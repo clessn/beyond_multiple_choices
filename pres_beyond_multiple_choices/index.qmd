@@ -8,11 +8,13 @@ format:
     theme: night
     logo: images/ul_logo.png
     footer: "Beyond Multiple Choices"
+    transition: slide
+    transition-speed: fast
+    navigation-mode: vertical
+    
 ---
 
-
 ## Can open-source language models be trusted to reliably clean and analyze open-ended survey questions?{#title-slide .center}
-
 
 ## Pros and cons of open-ended questions{#title-slide .center .smaller}
 
@@ -49,3 +51,44 @@ format:
 - Grammar and spelling errors
 
 :::
+::::
+
+## {auto-animate="true"}
+
+```{.r code-line-numbers="1"}
+devtools::install_github("clessn/clellm")
+```
+
+## {auto-animate=true}
+
+```{.r code-line-numbers="3"}
+devtools::install_github("clessn/clellm")
+
+clellm::install_ollama()
+```
+## {auto-animate=true}
+
+```{.r code-line-numbers="5"}
+devtools::install_github("clessn/clellm")
+
+clellm::install_ollama()
+
+clellm::ollama_install_model("model_name")
+```
+## {auto-animate=true}
+
+```{.r code-line-numbers="7"}
+devtools::install_github("clessn/clellm")
+
+clellm::install_ollama()
+
+clellm::ollama_install_model("model_name")
+
+prompt <- clellm::ollama_prompt("prompt", model = "model_name")
+```
+
+## Prompt
+
+```r
+prompt <- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
+```
