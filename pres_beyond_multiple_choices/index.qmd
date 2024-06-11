@@ -8,13 +8,12 @@ format:
     theme: night
     logo: images/ul_logo.png
     footer: "Beyond Multiple Choices"
-    transition: slide
+    transition: zoom
     transition-speed: fast
-    navigation-mode: vertical
     
 ---
 
-## Can open-source language models be trusted to reliably clean and analyze open-ended survey questions?{#title-slide .center}
+## Can open-source language models be trusted to reliably clean and analyze open-ended survey questions?{.center}
 
 ## Pros and cons of open-ended questions{#title-slide .center .smaller}
 

@@ -8,7 +8,7 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.40">
+  <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Laurence-Olivier M. Foisy Hubert Cadieux Étienne Proulx Yannick Dufresne">
   <title>Beyond Multiple Choices</title>
@@ -42,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -406,7 +406,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 </div>
 
 </section>
-<section id="title-slide" class="slide level2 center">
+<section id="can-open-source-language-models-be-trusted-to-reliably-clean-and-analyze-open-ended-survey-questions" class="slide level2 center">
 <h2>Can open-source language models be trusted to reliably clean and analyze open-ended survey questions?</h2>
 </section>
 <section id="title-slide" class="slide level2 center smaller">
@@ -463,7 +463,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 </section>
 <section id="prompt" class="slide level2">
 <h2>Prompt</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource txt number-lines code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href=""></a>prompt &lt;- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>prompt <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following "</span>,<span class="fu">length</span>(issues) ,<span class="st">" categories it belongs: "</span>,issues_string,<span class="st">". Use your judgement and only output a single issue category. The answer your need to categorize is: "</span>, data<span class="sc">$</span>open_ended_issue[i], <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-auto-generated-content">
 <p><img src="images/ul_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -563,7 +563,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
         rtl: false,
 
         // see https://revealjs.com/vertical-slides/#navigation-mode
-        navigationMode: 'default',
+        navigationMode: 'linear',
 
         // Randomizes the order of slides each time the presentation loads
         shuffle: false,
@@ -627,7 +627,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'zoom',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'fast',
@@ -713,7 +713,18 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -745,29 +756,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -775,7 +764,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
