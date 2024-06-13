@@ -409,7 +409,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 <section id="can-open-source-language-models-be-trusted-to-reliably-clean-and-analyze-open-ended-survey-questions" class="slide level2 center">
 <h2>Can open-source language models be trusted to reliably clean and analyze open-ended survey questions?</h2>
 </section>
-<section id="title-slide" class="slide level2 center smaller">
+<section id="pros-and-cons-of-open-ended-questions" class="slide level2 center smaller">
 <h2>Pros and cons of open-ended questions</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -433,37 +433,194 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 </div>
 </div>
 </section>
-<section id="section" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="classic-methods-and-their-limitations" class="slide level2 center smaller">
+<h2>Classic Methods and their Limitations</h2>
+<h3 id="manual-coding">Manual Coding</h3>
+<ul>
+<li>Time-consuming</li>
+<li>Subjective</li>
+<li>Costly</li>
+</ul>
+<h3 id="dictionary-based-methods">Dictionary-based methods</h3>
+<ul>
+<li>Limited to pre-defined categories</li>
+<li>Time-consuming to create</li>
+<li>Limited to the dictionary’s scope</li>
+</ul>
+<h3 id="machine-learning">Machine Learning</h3>
+<ul>
+<li>Requires a lot of data</li>
+<li>Difficult to train</li>
+<li>Requires a lot of time</li>
+</ul>
 </section>
-<section id="section-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span>
-<span id="cb2-2" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb2-3" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">install_ollama</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="ollama" class="slide level2">
+<h2>Ollama</h2>
+<ul>
+<li>Open-source</li>
+<li>Large Language Models</li>
+<li>Easy to use API</li>
+</ul>
+<p><img data-src="images/ollama.png" class="absolute" style="top: 200px; right: 0px; width: 40%; "></p>
 </section>
-<section id="section-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div class="sourceCode" id="cb3" data-code-line-numbers="5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span>
-<span id="cb3-2" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb3-3" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">install_ollama</span>()</span>
-<span id="cb3-4" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb3-5" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">ollama_install_model</span>(<span class="st">"model_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="manual-coding-1" class="slide level2">
+<h2>Manual Coding</h2>
+<center>
+<p><img data-src="images/issue_distribution.png" style="width:75.0%"></p>
+</center>
 </section>
-<section id="section-3" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title"></h2>
-<div class="sourceCode" id="cb4" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span>
-<span id="cb4-2" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb4-3" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">install_ollama</span>()</span>
-<span id="cb4-4" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb4-5" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">ollama_install_model</span>(<span class="st">"model_name"</span>)</span>
+<section id="clellm" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">CLELLM</h2>
+<div class="sourceCode" id="cb1" data-code-line-numbers="1,2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a><span class="co"># Use devtools to install the clellm package from github</span></span>
+<span id="cb1-2" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="clellm-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">CLELLM</h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="4,5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="co"># Use devtools to install the clellm package from github</span></span>
+<span id="cb2-2" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span>
+<span id="cb2-3" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-4" class="hljs-ln-code"><a href=""></a><span class="co">#Use the install_ollama() function to install ollama, only on linux</span></span>
+<span id="cb2-5" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">install_ollama</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="clellm-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">CLELLM</h2>
+<div class="sourceCode" id="cb3" data-code-line-numbers="7,8"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="co"># Use devtools to install the clellm package from github</span></span>
+<span id="cb3-2" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span>
+<span id="cb3-3" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-4" class="hljs-ln-code"><a href=""></a><span class="co">#Use the install_ollama() function to install ollama, only on linux</span></span>
+<span id="cb3-5" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">install_ollama</span>()</span>
+<span id="cb3-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-7" class="hljs-ln-code"><a href=""></a><span class="co"># Use the ollama_install_model() function to install models</span></span>
+<span id="cb3-8" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">ollama_install_model</span>(<span class="st">"model_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="clellm-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">CLELLM</h2>
+<div class="sourceCode" id="cb4" data-code-line-numbers="10,11"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href=""></a><span class="co"># Use devtools to install the clellm package from github</span></span>
+<span id="cb4-2" class="hljs-ln-code"><a href=""></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"clessn/clellm"</span>)</span>
+<span id="cb4-3" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-4" class="hljs-ln-code"><a href=""></a><span class="co">#Use the install_ollama() function to install ollama, only on linux</span></span>
+<span id="cb4-5" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">install_ollama</span>()</span>
 <span id="cb4-6" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb4-7" class="hljs-ln-code"><a href=""></a>prompt <span class="ot">&lt;-</span> clellm<span class="sc">::</span><span class="fu">ollama_prompt</span>(<span class="st">"prompt"</span>, <span class="at">model =</span> <span class="st">"model_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7" class="hljs-ln-code"><a href=""></a><span class="co"># Use the ollama_install_model() function to install models</span></span>
+<span id="cb4-8" class="hljs-ln-code"><a href=""></a>clellm<span class="sc">::</span><span class="fu">ollama_install_model</span>(<span class="st">"model_name"</span>)</span>
+<span id="cb4-9" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-10" class="hljs-ln-code"><a href=""></a><span class="co"># Use the ollama_prompt() function to prompt any model you want</span></span>
+<span id="cb4-11" class="hljs-ln-code"><a href=""></a>prompt <span class="ot">&lt;-</span> clellm<span class="sc">::</span><span class="fu">ollama_prompt</span>(<span class="st">"prompt"</span>, <span class="at">model =</span> <span class="st">"model_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="prompt" class="slide level2">
+<section id="prompt" class="slide level2 smaller">
 <h2>Prompt</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>prompt <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following "</span>,<span class="fu">length</span>(issues) ,<span class="st">" categories it belongs: "</span>,issues_string,<span class="st">". Use your judgement and only output a single issue category. The answer your need to categorize is: "</span>, data<span class="sc">$</span>open_ended_issue[i], <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>[1] "In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following 12 categories it belongs: 'Law and Crime', 'Culture and Nationalism', 'Public Lands and Agriculture', 'Governments and Governance', 'Immigration', 'Rights, Liberties, Minorities, and Discrimination', 'Health and Social Services', 'Economy and Employment', 'Education', 'Environment and Energy', 'International Affairs and Defense', 'Technology'. Use your judgement and only output a single issue category. The answer your need to categorize is: pension reform."</code></p>
+</section>
+<section id="accuracy" class="slide level2">
+<h2>Accuracy</h2>
+<center>
+<p><img data-src="images/accuracy.png" style="width:75.0%"></p>
+</center>
+</section>
+<section id="f1-score-results" class="slide level2 smaller">
+<h2>F1 Score results</h2>
+<table>
+<colgroup>
+<col style="width: 61%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Issue Category</th>
+<th style="text-align: left;">Llama3</th>
+<th style="text-align: left;">Phi3</th>
+<th style="text-align: left;">Mistral</th>
+<th style="text-align: left;">GPT-4</th>
+<th style="text-align: left;">Dict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Culture and Nationalism</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style="background-color: #FFFFFF; font-weight: bold; color: black">Economy and Employment</span></td>
+<td style="text-align: left;"><span style="background-color: #C0C0C0; font-weight: bold; color: black">0.9</span></td>
+<td style="text-align: left;"><span style="background-color: #CD7F32; font-weight: bold; color: black">0.87</span></td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;"><span style="background-color: #FFD700; font-weight: bold; color: black">0.94</span></td>
+<td style="text-align: left;">0.21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Education</td>
+<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Environment and Energy</td>
+<td style="text-align: left;">0.88</td>
+<td style="text-align: left;">0.8</td>
+<td style="text-align: left;">0.8</td>
+<td style="text-align: left;">0.84</td>
+<td style="text-align: left;">0.08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span style="background-color: #FFFFFF; font-weight: bold; color: black">Governments and Governance</span></td>
+<td style="text-align: left;">0.41</td>
+<td style="text-align: left;"><span style="background-color: #CD7F32; font-weight: bold; color: black">0.47</span></td>
+<td style="text-align: left;"><span style="background-color: #C0C0C0; font-weight: bold; color: black">0.56</span></td>
+<td style="text-align: left;"><span style="background-color: #FFD700; font-weight: bold; color: black">0.65</span></td>
+<td style="text-align: left;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style="background-color: #FFFFFF; font-weight: bold; color: black">Health and Social Services</span></td>
+<td style="text-align: left;"><span style="background-color: #C0C0C0; font-weight: bold; color: black">0.94</span></td>
+<td style="text-align: left;">0.83</td>
+<td style="text-align: left;"><span style="background-color: #CD7F32; font-weight: bold; color: black">0.91</span></td>
+<td style="text-align: left;"><span style="background-color: #FFD700; font-weight: bold; color: black">0.96</span></td>
+<td style="text-align: left;">0.34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Immigration</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Law and Crime</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rights, Liberties, Minorities, and Discrimination</td>
+<td style="text-align: left;">0.86</td>
+<td style="text-align: left;">0.86</td>
+<td style="text-align: left;">0.71</td>
+<td style="text-align: left;">0.57</td>
+<td style="text-align: left;">0.29</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span style="background-color: #FFFFFF; font-weight: bold; color: black">Weighted Mean</span></td>
+<td style="text-align: left;"><span style="background-color: #C0C0C0; font-weight: bold; color: black">0.81</span></td>
+<td style="text-align: left;"><span style="background-color: #CD7F32; font-weight: bold; color: black">0.77</span></td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;"><span style="background-color: #FFD700; font-weight: bold; color: black">0.86</span></td>
+<td style="text-align: left;">0.19</td>
+</tr>
+</tbody>
+</table>
 <div class="quarto-auto-generated-content">
 <p><img src="images/ul_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -627,7 +784,7 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'zoom',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'fast',

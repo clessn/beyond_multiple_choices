@@ -41,3 +41,29 @@ ggplot(accuracy_data, aes(x = reorder(Model, -Accuracy), y = Accuracy)) +
 
  ggsave("pub_beyond_multiple_choices/graphs/accuracy.png",
        width = 8, height = 6, dpi = 300)
+
+
+# Create the ggplot for revealjs
+
+ggplot(accuracy_data, aes(x = reorder(Model, -Accuracy), y = Accuracy)) +
+  geom_bar(stat = "identity", fill = "#ffffff") +
+  labs(x = "Model",
+       y = "Accuracy (%)") +
+  clessnize::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "white"),
+        axis.text.y = element_text(color = "white"),
+        plot.title = element_text(size = 20, face = "bold", color = "white"),
+        axis.title = element_text(size = 15, face = "bold", color = "white"),
+        axis.text = element_text(size = 12, face = "bold", color = "white"),
+        axis.title.y = element_text(size = 15, face = "bold", color = "white"),
+        axis.title.x = element_text(size = 15, face = "bold", color = "white"),
+        plot.caption = element_text(size = 10, face = "italic", color = "white"),
+        plot.subtitle = element_text(size = 15, face = "bold", color = "white"),
+        panel.background = element_rect(fill = "#111111", color = NA),
+        plot.background = element_rect(fill = "#111111", color = NA),
+        legend.background = element_rect(fill = "#111111"))
+
+
+
+ ggsave("pres_beyond_multiple_choices/images/accuracy.png",
+       width = 8, height = 6, dpi = 300)

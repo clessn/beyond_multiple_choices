@@ -37,3 +37,26 @@ ggplot(issue_distribution, aes(x = reorder(issue_category_human, -count), y = co
 
 ggsave("pub_beyond_multiple_choices/graphs/issue_distribution.png",
        width = 8, height = 6, dpi = 300)
+
+ggplot(issue_distribution, aes(x = reorder(issue_category_human, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "#ffffff") +
+  labs(x = "Issue Category",
+       y = "Count") +
+  clessnize::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 50, hjust = 1, color = "white"),
+        axis.text.y = element_text(color = "white"),
+        plot.title = element_text(size = 20, face = "bold", color = "white"),
+        axis.title = element_text(size = 15, face = "bold", color = "white"),
+        axis.text = element_text(size = 12, face = "bold", color = "white"),
+        axis.title.y = element_text(size = 15, face = "bold", color = "white"),
+        axis.title.x = element_text(size = 15, face = "bold", color = "white"),
+        plot.caption = element_text(size = 10, face = "italic", color = "white"),
+        plot.subtitle = element_text(size = 15, face = "bold", color = "white"),
+        panel.background = element_rect(fill = "#111111", color = NA),
+        plot.background = element_rect(fill = "#111111", color = NA),
+        legend.background = element_rect(fill = "#111111")) +
+
+  scale_x_discrete(labels = new_labels)
+
+ggsave("pres_beyond_multiple_choices/images/issue_distribution.png",
+       width = 8, height = 6, dpi = 300)

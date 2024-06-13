@@ -14,6 +14,9 @@ issues_string <- paste0("'", paste(issues, collapse = "', '"), "'")
 
 data$issue_category_mistral <- NA
 
+
+i <- 15
+
 for (i in 1:nrow(data)) {
     prompt <- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
 
