@@ -42,6 +42,3 @@ if (dir_exists(source_dir)) {
 } else {
   message("The source directory does not exist.")
 }
-
-
-

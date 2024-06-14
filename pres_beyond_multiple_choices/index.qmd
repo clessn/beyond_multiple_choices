@@ -110,6 +110,10 @@ format:
 
 **Human Coder as ground truth**
 
+- Accuracy
+- F1 Score
+- Above 0.8 is good for multi class categorization
+
 :::
 
 :::{.column width=25%}
