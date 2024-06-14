@@ -202,26 +202,26 @@ The F-scores for each model across different issue categories are summarized in 
 
 ::: {#tbl-issues}
 
-|Issue Category                                    | Llama3| Phi3| Mistral|  GPT-4| Dictionary|
-|:-------------------------------------------------|------:|----:|-------:|------:|----------:|
-|Culture and Nationalism                           |     NA|   NA|    1.00|     NA|         NA|
-|Economy and Employment                            |   0.90| 0.87|      NA|   0.94|       0.21|
-|Education                                         |   0.67| 0.67|    1.00|   0.67|         NA|
-|Environment and Energy                            |   0.88| 0.80|    0.80|   0.84|       0.08|
-|Governments and Governance                        |   0.41| 0.47|    0.56|   0.65|       0.03|
-|Health and Social Services                        |   0.94| 0.83|    0.91|   0.96|       0.34|
-|Immigration                                       |   1.00| 1.00|    1.00|   1.00|         NA|
-|Law and Crime                                     |   1.00| 1.00|    1.00|   1.00|         NA|
-|Rights, Liberties, Minorities, and Discrimination |   0.86| 0.86|    0.71|   0.57|       0.29|
-|Mean F-score                                      |   0.83| 0.81|    0.87|   0.83|       0.19|
+|Issue Category                                    |Llama3 |Phi3 |Mistral |GPT-4 |Dict |
+|:-------------------------------------------------|:------|:----|:-------|:-----|:----|
+|Culture and Nationalism                           |NA     |NA   |1       |NA    |NA   |
+|Economy and Employment                            |0.9    |0.87 |NA      |0.94  |0.21 |
+|Education                                         |0.67   |0.67 |1       |0.67  |NA   |
+|Environment and Energy                            |0.88   |0.8  |0.8     |0.84  |0.08 |
+|Governments and Governance                        |0.41   |0.47 |0.56    |0.65  |0.03 |
+|Health and Social Services                        |0.94   |0.83 |0.91    |0.96  |0.34 |
+|Immigration                                       |1      |1    |1       |1     |NA   |
+|Law and Crime                                     |1      |1    |1       |1     |NA   |
+|Rights, Liberties, Minorities, and Discrimination |0.86   |0.86 |0.71    |0.57  |0.29 |
+|Weighted Mean for Issue Frequency                 |0.81   |0.77 |0.5     |0.86  |0.19 |
 
 F Scores for each model by issue category.
 
 :::
 
-The F-scores demonstrate that open-source models, particularly Mistral, can effectively handle the categorization of open-ended survey responses, approaching the performance of the more advanced but paid GPT-4. The dictionary approach's consistently low scores underscore its limitations in this context and the necessity of using more advanced NLP techniques for nuanced analysis.
+The F-scores demonstrate that open-source models, particularly Llama3, can effectively handle the categorization of open-ended survey responses, approaching the performance of the more advanced but paid GPT-4. The dictionary approach's consistently low scores underscore its limitations in this context and the necessity of using more advanced NLP techniques for nuanced analysis.
 
-These findings suggest that while GPT-4 remains the most accurate, open-source models like Mistral, Llama3, and Phi3 are viable alternatives for researchers, especially when cost or data privacy are concerned. The results also highlight the variability in model performance across different issue categories, emphasizing the importance of choosing the right model based on the specific context and requirements of the survey analysis.
+These findings suggest that while GPT-4 remains the most accurate, open-source models like Llama3, Phi3, and Mistral are viable alternatives for researchers, especially when cost or data privacy are concerned. The results also highlight the variability in model performance across different issue categories, emphasizing the importance of choosing the right model based on the specific context and requirements of the survey analysis.
 
 # Discussion
 

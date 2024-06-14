@@ -93,39 +93,37 @@ format:
 
 ::::{.columns}
 
-:::{.column width=33%}
-- CES 2021 Survey
-  - Question: "What is the most important issue to you personally in this federal election?"
+:::{.column width=25%}
+**CES 2021 Survey**
 
-- Human Coder as ground truth
+- Question: "What is the most important issue to you personally in this federal election?"
 
-- Models
+:::
+
+:::{.column width=25%}
+
+**CAPP's 12 categories of issues**
+
+:::
+
+:::{.column width=25%}
+
+**Human Coder as ground truth**
+
+:::
+
+:::{.column width=25%}
+
+**Models**
+
+- Open-Source
   - Llama3
   - Phi3
   - Mistral
+
+- Commercial
   - GPT-4
-  - Dictionary
 
-:::
-
-:::{.column width=33%}
-  - Law and Crime
-  - Culture and Nationalism
-  - Public Lands and Agriculture
-  - Governments and Governance
-  - Immigration
-  - Rights, Liberties, Minorities, and Discrimination
-
-:::
-
-:::{.column width=33%}
-
-  - Health and Social Services
-  - Economy and Employment
-  - Education
-  - Environment and Energy
-  - International Affairs and Defense
-  - Technology
 :::
 
 ::::

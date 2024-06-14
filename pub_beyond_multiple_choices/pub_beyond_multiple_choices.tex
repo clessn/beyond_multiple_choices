@@ -43,28 +43,14 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
-\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}{
-    \@ifstar
-      \xxxParagraphStar
-      \xxxParagraphNoStar
-  }
-  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
-  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}{
-    \@ifstar
-      \xxxSubParagraphStar
-      \xxxSubParagraphNoStar
-  }
-  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
-  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
-\makeatother
 
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -84,7 +70,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -94,7 +80,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -582,62 +568,62 @@ The F-scores for each model across different issue categories are
 summarized in Table~\ref{tbl-issues}:
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.5682}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0795}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0568}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0909}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0795}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1250}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.6173}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0864}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0617}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0988}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0741}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0617}}@{}}
 \caption{F Scores for each model by issue
 category.}\label{tbl-issues}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Issue Category
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Llama3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Phi3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Mistral
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 GPT-4
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Dictionary
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dict
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Issue Category
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Llama3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Phi3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Mistral
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 GPT-4
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Dictionary
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Dict
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Culture and Nationalism & NA & NA & 1.00 & NA & NA \\
-Economy and Employment & 0.90 & 0.87 & NA & 0.94 & 0.21 \\
-Education & 0.67 & 0.67 & 1.00 & 0.67 & NA \\
-Environment and Energy & 0.88 & 0.80 & 0.80 & 0.84 & 0.08 \\
+Culture and Nationalism & NA & NA & 1 & NA & NA \\
+Economy and Employment & 0.9 & 0.87 & NA & 0.94 & 0.21 \\
+Education & 0.67 & 0.67 & 1 & 0.67 & NA \\
+Environment and Energy & 0.88 & 0.8 & 0.8 & 0.84 & 0.08 \\
 Governments and Governance & 0.41 & 0.47 & 0.56 & 0.65 & 0.03 \\
 Health and Social Services & 0.94 & 0.83 & 0.91 & 0.96 & 0.34 \\
-Immigration & 1.00 & 1.00 & 1.00 & 1.00 & NA \\
-Law and Crime & 1.00 & 1.00 & 1.00 & 1.00 & NA \\
+Immigration & 1 & 1 & 1 & 1 & NA \\
+Law and Crime & 1 & 1 & 1 & 1 & NA \\
 Rights, Liberties, Minorities, and Discrimination & 0.86 & 0.86 & 0.71 &
 0.57 & 0.29 \\
-Mean F-score & 0.83 & 0.81 & 0.87 & 0.83 & 0.19 \\
+Weighted Mean for Issue Frequency & 0.81 & 0.77 & 0.5 & 0.86 & 0.19 \\
 \end{longtable}
 
-The F-scores demonstrate that open-source models, particularly Mistral,
+The F-scores demonstrate that open-source models, particularly Llama3,
 can effectively handle the categorization of open-ended survey
 responses, approaching the performance of the more advanced but paid
 GPT-4. The dictionary approach's consistently low scores underscore its
@@ -645,7 +631,7 @@ limitations in this context and the necessity of using more advanced NLP
 techniques for nuanced analysis.
 
 These findings suggest that while GPT-4 remains the most accurate,
-open-source models like Mistral, Llama3, and Phi3 are viable
+open-source models like Llama3, Phi3, and Mistral are viable
 alternatives for researchers, especially when cost or data privacy are
 concerned. The results also highlight the variability in model
 performance across different issue categories, emphasizing the
@@ -743,7 +729,7 @@ still in its infancy, has a lot of room for growth and improvement. LLM
 technology might not yet be ready to replace human coders but their
 potential applications in survey research are vast and exciting.
 
-The data as well as the code used for this project is available at
+The code and data used for this project are available at
 \url{https://github.com/clessn/beyond_multiple_choices}.
 
 \newpage{}
