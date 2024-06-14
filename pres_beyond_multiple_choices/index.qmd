@@ -54,34 +54,81 @@ format:
 :::
 ::::
 
-## Classic Methods and their Limitations{.center .smaller}
+## Classic Methods and their Limitations{.smaller}
 
-### Manual Coding
+::::{.columns}
 
-- Time-consuming
-- Subjective
-- Costly
+:::{.column width=33%}
 
-### Dictionary-based methods
+**Manual Coding**
 
-- Limited to pre-defined categories
-- Time-consuming to create
-- Limited to the dictionary's scope
+  - Time-consuming
+  - Subjective
+  - Costly
+:::
 
-### Machine Learning
+:::{.column width=33%}
 
-- Requires a lot of data
-- Difficult to train
-- Requires a lot of time
+**Dictionary-based methods**
 
+  - Limited to pre-defined categories
+  - Time-consuming to create
+  - Limited to the dictionary's scope
 
-## Ollama
+:::
 
-- Open-source
-- Large Language Models
-- Easy to use API
+:::{.column width=33%}
 
-![](images/ollama.png){.absolute top=200 right=0 width=40%}
+**Machine Learning**
+
+  - Requires a lot of data
+  - Difficult to train
+  - Requires a lot of time
+
+:::
+
+::::
+
+## Method{.smaller}
+
+::::{.columns}
+
+:::{.column width=33%}
+- CES 2021 Survey
+  - Question: "What is the most important issue to you personally in this federal election?"
+
+- Human Coder as ground truth
+
+- Models
+  - Llama3
+  - Phi3
+  - Mistral
+  - GPT-4
+  - Dictionary
+
+:::
+
+:::{.column width=33%}
+  - Law and Crime
+  - Culture and Nationalism
+  - Public Lands and Agriculture
+  - Governments and Governance
+  - Immigration
+  - Rights, Liberties, Minorities, and Discrimination
+
+:::
+
+:::{.column width=33%}
+
+  - Health and Social Services
+  - Economy and Employment
+  - Education
+  - Environment and Energy
+  - International Affairs and Defense
+  - Technology
+:::
+
+::::
 
 ## Manual Coding
 
@@ -90,6 +137,14 @@ format:
 ![](images/issue_distribution.png){width="75%"}
 
 </center>
+
+## Ollama
+
+- Open-source
+- Large Language Models
+- Easy to use API
+
+![](images/ollama.png){.absolute top=200 right=0 width=40%}
 
 ## CLELLM{auto-animate="true"}
 
@@ -161,3 +216,19 @@ prompt <- clellm::ollama_prompt("prompt", model = "model_name")
 |Law and Crime                                     |1      |1    |1       |1     |NA   |
 |Rights, Liberties, Minorities, and Discrimination |0.86   |0.86 |0.71    |0.57  |0.29 |
 |<span style="background-color: #FFFFFF; font-weight: bold; color: black">Weighted Mean</span>                                     |<span style="background-color: #C0C0C0; font-weight: bold; color: black">0.81</span>   |<span style="background-color: #CD7F32; font-weight: bold; color: black">0.77</span> |0.5     |<span style="background-color: #FFD700; font-weight: bold; color: black">0.86</span>  |0.19 |
+
+## Conclusion{.smaller}
+
+- Lack context and nuance
+- Very promising
+
+### Limitations
+
+- Prompt limitation
+
+### Future work
+
+- More validation work needs to be done
+- Deploy a survey only with open-ended questions 
+  - Test scale building with factor analysis
+  - Compare with other surveys

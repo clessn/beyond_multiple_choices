@@ -433,26 +433,78 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 </div>
 </div>
 </section>
-<section id="classic-methods-and-their-limitations" class="slide level2 center smaller">
+<section id="classic-methods-and-their-limitations" class="slide level2 smaller">
 <h2>Classic Methods and their Limitations</h2>
-<h3 id="manual-coding">Manual Coding</h3>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Manual Coding</strong></p>
 <ul>
 <li>Time-consuming</li>
 <li>Subjective</li>
 <li>Costly</li>
 </ul>
-<h3 id="dictionary-based-methods">Dictionary-based methods</h3>
+</div><div class="column" style="width:33%;">
+<p><strong>Dictionary-based methods</strong></p>
 <ul>
 <li>Limited to pre-defined categories</li>
 <li>Time-consuming to create</li>
 <li>Limited to the dictionary’s scope</li>
 </ul>
-<h3 id="machine-learning">Machine Learning</h3>
+</div><div class="column" style="width:33%;">
+<p><strong>Machine Learning</strong></p>
 <ul>
 <li>Requires a lot of data</li>
 <li>Difficult to train</li>
 <li>Requires a lot of time</li>
 </ul>
+</div>
+</div>
+</section>
+<section id="method" class="slide level2 smaller">
+<h2>Method</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<ul>
+<li><p>CES 2021 Survey</p>
+<ul>
+<li>Question: “What is the most important issue to you personally in this federal election?”</li>
+</ul></li>
+<li><p>Human Coder as ground truth</p></li>
+<li><p>Models</p>
+<ul>
+<li>Llama3</li>
+<li>Phi3</li>
+<li>Mistral</li>
+<li>GPT-4</li>
+<li>Dictionary</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:33%;">
+<ul>
+<li>Law and Crime</li>
+<li>Culture and Nationalism</li>
+<li>Public Lands and Agriculture</li>
+<li>Governments and Governance</li>
+<li>Immigration</li>
+<li>Rights, Liberties, Minorities, and Discrimination</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<ul>
+<li>Health and Social Services</li>
+<li>Economy and Employment</li>
+<li>Education</li>
+<li>Environment and Energy</li>
+<li>International Affairs and Defense</li>
+<li>Technology</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="manual-coding" class="slide level2">
+<h2>Manual Coding</h2>
+<center>
+<p><img data-src="images/issue_distribution.png" style="width:75.0%"></p>
+</center>
 </section>
 <section id="ollama" class="slide level2">
 <h2>Ollama</h2>
@@ -462,12 +514,6 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 <li>Easy to use API</li>
 </ul>
 <p><img data-src="images/ollama.png" class="absolute" style="top: 200px; right: 0px; width: 40%; "></p>
-</section>
-<section id="manual-coding-1" class="slide level2">
-<h2>Manual Coding</h2>
-<center>
-<p><img data-src="images/issue_distribution.png" style="width:75.0%"></p>
-</center>
 </section>
 <section id="clellm" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">CLELLM</h2>
@@ -621,6 +667,26 @@ Laurence-Olivier M. Foisy<br>Hubert Cadieux<br>Étienne Proulx<br>Yannick Dufres
 </tr>
 </tbody>
 </table>
+</section>
+<section id="conclusion" class="slide level2 smaller">
+<h2>Conclusion</h2>
+<ul>
+<li>Lack context and nuance</li>
+<li>Very promising</li>
+</ul>
+<h3 id="limitations">Limitations</h3>
+<ul>
+<li>Prompt limitation</li>
+</ul>
+<h3 id="future-work">Future work</h3>
+<ul>
+<li>More validation work needs to be done</li>
+<li>Deploy a survey only with open-ended questions
+<ul>
+<li>Test scale building with factor analysis</li>
+<li>Compare with other surveys</li>
+</ul></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <p><img src="images/ul_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
