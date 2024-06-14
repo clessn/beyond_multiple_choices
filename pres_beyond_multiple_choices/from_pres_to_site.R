@@ -5,6 +5,9 @@ library(fs)
 source_dir <- "/home/ral/Dropbox/git/beyond_multiple_choices/pres_beyond_multiple_choices"
 dest_dir <- "/home/ral/Dropbox/git/laurenceoliviermfoisy/presentation_ollama"
 
+# Specify the script's filename
+script_name <- "from_pres_to_site.R" # Replace with your actual script filename
+
 # Check if the source directory exists
 if (dir_exists(source_dir)) {
   
@@ -16,6 +19,9 @@ if (dir_exists(source_dir)) {
   
   # Copy each file and directory to the destination directory
   for (item in items_to_copy) {
+    # Skip the script file itself
+    if (basename(item) == script_name) next
+    
     # Create the corresponding path in the destination directory
     dest_item <- file.path(dest_dir, path_rel(item, start = source_dir))
     
@@ -36,11 +42,6 @@ if (dir_exists(source_dir)) {
 } else {
   message("The source directory does not exist.")
 }
-
-
-
-
-
 
 
 
