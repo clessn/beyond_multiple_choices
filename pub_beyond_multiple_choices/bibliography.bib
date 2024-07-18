@@ -54,17 +54,24 @@
   file = {/home/ral/Zotero/storage/TWKXZA5X/Baumer et al_2017_Comparing grounded theory and topic modeling.pdf}
 }
 
-@article{Benoit_2018,
+@article{benoit_etal18,
   title = {Quanteda: {{An R}} Package for the Quantitative Analysis of Textual Data},
-  author = {Benoit, Kenneth and Benoit, Kenneth and Watanabe, Kohei and Watanabe, Kohei and Wang, Haiyan and Wang, Haiyan and Nulty, Paul and Nulty, Paul and Obeng, Adam and Obeng, Adam and M{\"u}ller, Stefan and M{\"u}ller, Stefan and M{\"u}ller, Stefan and Matsuo, Akitaka and Matsuo, Akitaka},
+  shorttitle = {Quanteda},
+  author = {Benoit, Kenneth and Watanabe, Kohei and Wang, Haiyan and Nulty, Paul and Obeng, Adam and M{\"u}ller, Stefan and Matsuo, Akitaka},
   year = {2018},
-  journal = {The Journal of Open Source Software},
+  month = oct,
+  journal = {Journal of Open Source Software},
+  volume = {3},
+  number = {30},
+  pages = {774--774},
+  publisher = {The Open Journal},
+  issn = {2475-9066},
   doi = {10.21105/joss.00774},
+  urldate = {2024-03-18},
   abstract = {quanteda is an R package providing a comprehensive workflow and toolkit for natural language processing tasks such as corpus management, tokenization, analysis, and visualization. It has extensive functions for applying dictionary analysis, exploring texts using keywords-in-context, computing document and feature similarities, and discovering multi-word expressions through collocation scoring. Based entirely on sparse operations,it provides highly efficient methods for compiling document-feature matrices and for manipulating these or using them in further quantitative analysis. Using C++ and multi-threading extensively, quanteda is also considerably faster and more efficient than other R and Python packages in processing large textual data. The package is designed for R users needing to apply natural language processing to texts,from documents to final analysis. Its capabilities match or exceed those provided in many end-user software applications, many of which are expensive and not open source. The package is therefore of great benefit to researchers, students, and other analysts with fewer financial resources. While using quanteda requires R programming knowledge, its API is designed to enable powerful, efficient analysis with a minimum of steps. By emphasizing consistent design, furthermore, quanteda lowers the barriers to learning and using NLP and quantitative text analysis even for proficient R programmers.},
-  mag_id = {2895553377},
-  pmcid = {null},
-  pmid = {null},
-  file = {/home/ral/Zotero/storage/GPQY2NWD/Benoit et al_2018_quanteda.pdf}
+  copyright = {cc\_by},
+  langid = {english},
+  file = {/home/ral/Zotero/storage/R6ATH3LF/Benoit et al. - 2018 - quanteda An R package for the quantitative analys.pdf}
 }
 
 @article{Berlie_2019,
@@ -106,32 +113,6 @@
   pmid = {null}
 }
 
-@article{Blei_2007,
-  title = {A Correlated Topic Model of {{Science}}},
-  author = {Blei, David M. and Lafferty, John},
-  year = {2007},
-  journal = {The Annals of Applied Statistics},
-  doi = {10.1214/07-aoas114},
-  abstract = {Topic models, such as latent Dirichlet allocation (LDA), can be useful tools for the statistical analysis of document collections and other discrete data. The LDA model assumes that the words of each document arise from a mixture of topics, each of which is a distribution over the vocabulary. A limitation of LDA is the inability to model topic correlation even though, for example, a document about genetics is more likely to also be about disease than X-ray astronomy. This limitation stems from the use of the Dirichlet distribution to model the variability among the topic proportions. In this paper we develop the correlated topic model (CTM), where the topic proportions exhibit correlation via the logistic normal distribution [J. Roy. Statist. Soc. Ser. B 44 (1982) 139--177]. We derive a fast variational inference algorithm for approximate posterior inference in this model, which is complicated by the fact that the logistic normal is not conjugate to the multinomial. We apply the CTM to the articles from Science published from 1990--1999, a data set that comprises 57M words. The CTM gives a better fit of the data than LDA, and we demonstrate its use as an exploratory tool of large document collections.},
-  mag_id = {2128925311},
-  pmcid = {null},
-  pmid = {null},
-  file = {/home/ral/Zotero/storage/NEC7C6GF/Blei_Lafferty_2007_A correlated topic model of Science.pdf}
-}
-
-@article{Blei_2007,
-  title = {A Correlated Topic Model of {{Science}}},
-  author = {Blei, David M. and Blei, David M. and Lafferty, John and Lafferty, John},
-  year = {2007},
-  journal = {arXiv: Applications},
-  doi = {10.1214/07-aoas114},
-  abstract = {Topic models, such as latent Dirichlet allocation (LDA), can be useful tools for the statistical analysis of document collections and other discrete data. The LDA model assumes that the words of each document arise from a mixture of topics, each of which is a distribution over the vocabulary. A limitation of LDA is the inability to model topic correlation even though, for example, a document about genetics is more likely to also be about disease than X-ray astronomy. This limitation stems from the use of the Dirichlet distribution to model the variability among the topic proportions. In this paper we develop the correlated topic model (CTM), where the topic proportions exhibit correlation via the logistic normal distribution [J. Roy. Statist. Soc. Ser. B 44 (1982) 139--177]. We derive a fast variational inference algorithm for approximate posterior inference in this model, which is complicated by the fact that the logistic normal is not conjugate to the multinomial. We apply the CTM to the articles from Science published from 1990--1999, a data set that comprises 57M words. The CTM gives a better fit of the data than LDA, and we demonstrate its use as an exploratory tool of large document collections.},
-  mag_id = {3099640513},
-  pmcid = {null},
-  pmid = {null},
-  file = {/home/ral/Zotero/storage/XWLJABPG/Blei et al_2007_A correlated topic model of Science.pdf}
-}
-
 @article{Blei_2012,
   title = {Probabilistic Topic Models},
   author = {Blei, David M. and Blei, David M.},
@@ -142,6 +123,19 @@
   mag_id = {2174706414},
   pmcid = {null},
   pmid = {null}
+}
+
+@article{blei_lafferty07,
+  title = {A Correlated Topic Model of {{Science}}},
+  author = {Blei, David M. and Lafferty, John},
+  year = {2007},
+  journal = {The Annals of Applied Statistics},
+  doi = {10.1214/07-aoas114},
+  abstract = {Topic models, such as latent Dirichlet allocation (LDA), can be useful tools for the statistical analysis of document collections and other discrete data. The LDA model assumes that the words of each document arise from a mixture of topics, each of which is a distribution over the vocabulary. A limitation of LDA is the inability to model topic correlation even though, for example, a document about genetics is more likely to also be about disease than X-ray astronomy. This limitation stems from the use of the Dirichlet distribution to model the variability among the topic proportions. In this paper we develop the correlated topic model (CTM), where the topic proportions exhibit correlation via the logistic normal distribution [J. Roy. Statist. Soc. Ser. B 44 (1982) 139--177]. We derive a fast variational inference algorithm for approximate posterior inference in this model, which is complicated by the fact that the logistic normal is not conjugate to the multinomial. We apply the CTM to the articles from Science published from 1990--1999, a data set that comprises 57M words. The CTM gives a better fit of the data than LDA, and we demonstrate its use as an exploratory tool of large document collections.},
+  mag_id = {2128925311},
+  pmcid = {null},
+  pmid = {null},
+  file = {/home/ral/Zotero/storage/NEC7C6GF/Blei_Lafferty_2007_A correlated topic model of Science.pdf}
 }
 
 @book{bradburn_etal04,
