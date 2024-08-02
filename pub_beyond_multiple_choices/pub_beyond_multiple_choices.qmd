@@ -206,6 +206,8 @@ To test the accuracy of each model, the percentage of correct categorization was
 
 Accuracy is often not the best metric to evaluate the performance of a model. One of its disadvantages is that it does not provide information on the performance of a classifier in each class separately [@obi23]. It also does not account for when there is an imbalance of classes in the dataset, like in the case of our dataset where economy and employment is by far the most mentioned issue. The F-score, also known as the F1-score, provides a more balanced measure of a model's performance by considering both precision and recall. Precision measures the proportion of correct positive predictions made by the model, while recall measures the proportion of actual positives that were correctly identified. The F-score is the harmonic mean of precision and recall, which ensures that both metrics are given equal weight [@christen_etal24].
 
+The definition of a "good" F1 score can be context-specific, heavily influenced by the specific nuances of the dataset and the research goals. This is particularly relevant in our analysis, where we compare several models and techniques to categorize open-ended survey responses. By evaluating the F1-scores across different issue categories, we can better understand each model's strengths and weaknesses, providing a clearer picture of what constitutes a good F1 score in our specific application.
+
 The F-scores for each model across different issue categories are summarized in @tbl-issues:
 
 ::: {#tbl-issues}
