@@ -14,9 +14,6 @@ issues_string <- paste0("'", paste(issues, collapse = "', '"), "'")
 
 data$issue_category_mistral <- NA
 
-
-i <- 15
-
 for (i in 1:nrow(data)) {
     prompt <- paste0("In this survey question, respondents had to name their most important issue. Please read the answer and determine to which of the following ",length(issues) ," categories it belongs: ",issues_string,". Use your judgement and only output a single issue category. The answer your need to categorize is: ", data$open_ended_issue[i], ".")
 
@@ -24,10 +21,9 @@ for (i in 1:nrow(data)) {
     attempt <- 1
     
     while (is.na(detected_issue) && attempt <= 10) {
-        # Get the answer from the LLM
+
         answer <- clellm::ollama_prompt(prompt = prompt, model = "mistral", print_result = FALSE)
         
-        # Check if the answer matches any of the predefined categories
         for (issue in issues) {
             if (str_detect(answer, fixed(issue, ignore_case = TRUE))) {
                 detected_issue <- issue
@@ -38,7 +34,6 @@ for (i in 1:nrow(data)) {
         attempt <- attempt + 1
     }
     
-    # Assign the detected issue to the issue_category column
     data$issue_category_mistral[i] <- detected_issue
 
     print(paste0(i, " was ", data$open_ended_issue[i], " and is now marked as ", detected_issue, "."))
@@ -57,10 +52,8 @@ for (i in 1:nrow(data)) {
     attempt <- 1
     
     while (is.na(detected_issue) && attempt <= 10) {
-        # Get the answer from the LLM
         answer <- clellm::ollama_prompt(prompt = prompt, model = "llama3", print_result = FALSE)
-        
-        # Check if the answer matches any of the predefined categories
+    
         for (issue in issues) {
             if (str_detect(answer, fixed(issue, ignore_case = TRUE))) {
                 detected_issue <- issue
@@ -71,7 +64,6 @@ for (i in 1:nrow(data)) {
         attempt <- attempt + 1
     }
     
-    # Assign the detected issue to the issue_category column
     data$issue_category_llama3[i] <- detected_issue
 
     print(paste0(i, " was ", data$open_ended_issue[i], " and is now marked as ", detected_issue, "."))
@@ -90,10 +82,9 @@ for (i in 1:nrow(data)) {
     attempt <- 1
     
     while (is.na(detected_issue) && attempt <= 10) {
-        # Get the answer from the LLM
+
         answer <- clellm::ollama_prompt(prompt = prompt, model = "phi3:mini", print_result = FALSE)
         
-        # Check if the answer matches any of the predefined categories
         for (issue in issues) {
             if (str_detect(answer, fixed(issue, ignore_case = TRUE))) {
                 detected_issue <- issue
@@ -104,7 +95,6 @@ for (i in 1:nrow(data)) {
         attempt <- attempt + 1
     }
     
-    # Assign the detected issue to the issue_category column
     data$issue_category_phi3[i] <- detected_issue
 
     print(paste0(i, " was ", data$open_ended_issue[i], " and is now marked as ", detected_issue, "."))
@@ -125,7 +115,7 @@ for (i in 1:nrow(data)) {
     attempt <- 1
     
     while (is.na(detected_issue) && attempt <= 10) {
-        # Get the answer from the LLM
+
         chat_prompt <- openai::create_chat_completion(
         model = "gpt-4-turbo",
         messages = list(
@@ -140,7 +130,6 @@ for (i in 1:nrow(data)) {
 
         answer <- chat_prompt$choices$message.content
         
-        # Check if the answer matches any of the predefined categories
         for (issue in issues) {
             if (str_detect(answer, fixed(issue, ignore_case = TRUE))) {
                 detected_issue <- issue
